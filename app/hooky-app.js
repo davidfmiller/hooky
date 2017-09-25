@@ -64,6 +64,8 @@
   app.disable('x-powered-by');
   app.engine('dust', cons.dust);
 
+  app.use(bodyParser.json())
+
   app.set('template_engine', template_engine);
 //  app.set('domain', domain);
   app.set('views', __dirname + '/views');
@@ -89,6 +91,30 @@
     });
 
   });
+
+  router.post('/', function getAbout(req, res) {
+
+    var body = req.body;
+
+    fs.appendFile("./hooky.log", (new Date()) + " " + JSON.stringify(body) + "\n", function(err) {
+      if(err) {
+        return console.log(err);
+      }
+      res.status(200).send(req.body);
+    }); 
+
+//    resetMetadata(req);
+/*
+    metadata.page.title = 'About Sparkkr';
+    metadata.page.description = 'About Sparkkr';
+    metadata.page.class = 'meta about';
+
+    res.render('index', {
+      meta : metadata
+    });
+*/
+  });
+
 
   app.use(morgan('dev')); 
   app.use(express.static(__dirname + '/static'));
