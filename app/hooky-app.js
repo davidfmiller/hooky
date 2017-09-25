@@ -96,7 +96,11 @@
 
     var body = req.body;
 
-    fs.appendFile("./hooky.log", (new Date()) + " " + JSON.stringify(body) + "\n", function(err) {
+    console.log(req.headers);
+
+    var str = (new Date()) + "\n" + JSON.stringify(req.headers, null, 2) + "\n" + JSON.stringify(body, null, 2) + "\n\n";
+
+    fs.appendFile("../hooky.log", str, function(err) {
       if(err) {
         return console.log(err);
       }
