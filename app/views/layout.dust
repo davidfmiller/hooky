@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <title>hooky</title>
 
-    <link rel="stylesheet" href="/assets/css/slower.css">
+    <script type="text/javascript" src="/assets/js/hooky.js"></script>
+    <link rel="stylesheet" href="/assets/css/hooky.css">
     <meta name="keywords" content="hooky">
     <meta name="description" content="hooky">
     <meta name="viewport" content="width=400">

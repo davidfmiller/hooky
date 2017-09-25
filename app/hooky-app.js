@@ -76,7 +76,7 @@
   });
 
   app.use(morgan('dev')); 
-  app.use(express.static(__dirname + '/static'));
+  app.use(express.static(__dirname + '/public'));
 
   router.get('/', function getAbout(req, res) {
 

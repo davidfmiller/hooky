@@ -16,7 +16,7 @@ module.exports = function(grunt) {
           mangle: false
         },
         files: {
-          'public/assets/js/slower.js': ['scripts/*.js']
+          'public/assets/js/hooky.js': ['scripts/*.js']
         }
       }
     },
