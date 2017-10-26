@@ -20,8 +20,10 @@
 //      fileUpload = require('express-fileupload'),
       queryString = require('query-string'),
       morgan = require('morgan'),
-      cookieParser = require('cookie-parser'),
-      session = require('express-session'),
+//      cookieParser = require('cookie-parser'),
+      HookModel = require('./models/hook'),
+      session = require('express-session');
+
 /*
       i18n = new (require('i18n-2'))({
         locales: ['en'],
@@ -34,7 +36,7 @@
 //      RMR = require('rmr-lib'),
 //      LIB = require('./lib/sparkkr-web-lib'),
 
-      MAXFILESIZE = 2 * 1024 * 1024;
+
 
   const
       template_engine = 'dust',
@@ -48,8 +50,8 @@
       resetMetadata = function(req) {
         metadata.page = {
           'image' : '/assets/img/og-image.png',
-          'title' : 'dfm',
-          'description' : 'Photography',
+          'title' : 'hooky',
+          'description' : 'Hooky',
           'class' : '',
           'url' : ''
         };
@@ -75,6 +77,7 @@
     next();
   });
 
+
   app.use(morgan('dev')); 
   app.use(express.static(__dirname + '/public'));
 
@@ -96,7 +99,30 @@
 
     var body = req.body;
 
-    console.log(req.headers);
+      console.log(req.headers);
+
+      HookModel.query().insert({
+        headers : 'HEADERS',
+        payload : 'PAYLOAD'
+      }).then(function(hook) {
+        console.log(hook);
+      }).catch(function(err) {
+        console.log(err);
+      });
+
+/*
+        var obj = {};
+        obj[socialType + 'ID'] = social.id;
+
+        Person
+        .query()
+        .patchAndFetchById(personID, obj)
+        .then(function(person) {
+          resolve(person);
+        }).catch(function(err) {
+          reject(err);
+        });
+
 
     var str = (new Date()) + "\n" + JSON.stringify(req.headers, null, 2) + "\n" + JSON.stringify(body, null, 2) + "\n\n";
 

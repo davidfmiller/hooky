@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>hooky</title>
 
-    <script type="text/javascript" src="/assets/js/hooky.js"></script>
+    <script type="text/javascript" src="/assets/js/hooky.bundle.js"></script>
     <link rel="stylesheet" href="/assets/css/hooky.css">
     <meta name="keywords" content="hooky">
     <meta name="description" content="hooky">
