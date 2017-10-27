@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "dustjs-helpers": "^1.7.3",
+    "dustjs-linkedin": "^2.7.5",
     "express": "^4.14.1",
     "grunt": "~0.4.1",
     "grunt-contrib-compass": "~0.6.0",

@@ -4,9 +4,9 @@
 <ol>
 {#hooks}
   <li>
-    <h4>{creationStamp}</h4>
-    <pre>{headers}</pre>
-    <pre>{payload}</pre>
+    <h4>{@formatDate stamp=creationStamp /}</h4>
+    <pre>{@jsonFormat string=headers /}</pre>
+    <pre>{@jsonFormat string=payload /}</pre>
   </li>
 {/hooks}
 </ol>
