@@ -1,0 +1,10 @@
+{>layout/}
+{<content}
+
+{#hook}
+<h4>{@formatDate stamp=creationStamp /}</h4>
+<pre>{@jsonFormat string=headers /}</pre>
+<pre>{@jsonFormat string=payload /}</pre>
+{/hook}
+
+{/content}

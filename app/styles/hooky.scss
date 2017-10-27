@@ -10,15 +10,38 @@ h1 {
   margin-bottom: 10px;
 }
 
+h4 {
+  font-size: 12px;
+}
+
 ol {
 
   li {
-    h4 {
-      font-size: 12px;
-    }
   
     & + li {
       margin-top: 10px;
     }
   }
+}
+
+footer {
+
+  color: #ddd;
+  text-align: right;
+
+  a {
+    color: #ddd;
+  }
+
+
+  &:hover {
+    color: #888;
+
+    a {
+      color: #888;
+    }
+  }
+
+  margin-top: 20px;
+  font-size: 11px;
 }

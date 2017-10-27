@@ -75,9 +75,36 @@
     next();
   });
 
-
   app.use(morgan('dev')); 
   app.use(express.static(__dirname + '/public'));
+
+  router.get('/hook/:id', function getAbout(req, res) {
+
+    resetMetadata(req);
+
+    metadata.page.title = 'Hooky';
+    metadata.page.description = 'Hooky';
+    metadata.page.class = 'meta about';
+
+    HookModel.query()
+    .where('id', '=', req.params.id)
+    .then(function (hook) {
+
+      console.log(hook);
+
+      res.render('hook', {
+        meta : metadata,
+        hook : hook
+      });
+
+    })
+    .catch(function (err) {
+      res.status(500).send(err);
+    });
+
+
+  });
+
 
   router.get('/', function getAbout(req, res) {
 
@@ -155,41 +182,7 @@
         console.log(err);
       });
 
-/*
-        var obj = {};
-        obj[socialType + 'ID'] = social.id;
-
-        Person
-        .query()
-        .patchAndFetchById(personID, obj)
-        .then(function(person) {
-          resolve(person);
-        }).catch(function(err) {
-          reject(err);
-        });
-
-
-    var str = (new Date()) + "\n" + JSON.stringify(req.headers, null, 2) + "\n" + JSON.stringify(body, null, 2) + "\n\n";
-
-    fs.appendFile("../hooky.log", str, function(err) {
-      if(err) {
-        return console.log(err);
-      }
-      res.status(200).send(req.body);
-    }); 
-
-//    resetMetadata(req);
-/*
-    metadata.page.title = 'About Sparkkr';
-    metadata.page.description = 'About Sparkkr';
-    metadata.page.class = 'meta about';
-
-    res.render('index', {
-      meta : metadata
-    });
-*/
   });
-
 
   app.use(morgan('dev')); 
   app.use(express.static(__dirname + '/static'));
@@ -199,5 +192,3 @@
   console.log('💥  ' + port);
   
 }());
-
-  
