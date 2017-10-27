@@ -49,7 +49,7 @@
           'image' : '/assets/img/og-image.png',
           'title' : 'hooky',
           'keywords' : 'hooky',
-          'description' : 'hooky',
+          'description' : 'A simple tool for logging webhooks',
           'class' : '',
           'url' : ''
         };
