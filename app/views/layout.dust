@@ -2,12 +2,12 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>hooky</title>
+    <title>{meta.title}</title>
 
     <script type="text/javascript" src="/assets/js/hooky.bundle.js"></script>
     <link rel="stylesheet" href="/assets/css/hooky.css">
-    <meta name="keywords" content="hooky">
-    <meta name="description" content="hooky">
+    <meta name="keywords" content="{meta.keywords}">
+    <meta name="description" content="{meta.title}">
     <meta name="viewport" content="width=400">
 <!--
     <link href="/assets/img/favicon.ico" rel="shortcut icon">

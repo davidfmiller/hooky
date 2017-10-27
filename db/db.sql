@@ -1,7 +1,7 @@
 CREATE DATABASE hooky;
 
 # CREATE USER 'hooky'@'localhost' IDENTIFIED BY 'eP7JzMtnidhAVkmEhsvzzsHb!';
-# GRANT SELECT,INSERT,UPDATE,DELETE ON hooky.* TO 'hooky'@'localhost';
+# GRANT SELECT,INSERT,UPDATE,DELETE ON hooky.* TO hooky@localhost;
 # FLUSH PRIVILEGES;
 
 USE hooky;

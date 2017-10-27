@@ -48,7 +48,8 @@
         metadata.page = {
           'image' : '/assets/img/og-image.png',
           'title' : 'hooky',
-          'description' : 'Hooky',
+          'keywords' : 'hooky',
+          'description' : 'hooky',
           'class' : '',
           'url' : ''
         };
@@ -82,8 +83,8 @@
 
     resetMetadata(req);
 
-    metadata.page.title = 'About Sparkkr';
-    metadata.page.description = 'About Sparkkr';
+    metadata.page.title = 'Hooky';
+    metadata.page.description = 'Hooky';
     metadata.page.class = 'meta about';
 
       HookModel.query()
