@@ -1,5 +1,14 @@
 {>layout/}
 {<content}
 
+<ol>
+{#hooks}
+  <li>
+    <h4>{creationStamp}</h4>
+    <pre>{headers}</pre>
+    <pre>{payload}</pre>
+  </li>
+{/hooks}
+</ol>
 
 {/content}

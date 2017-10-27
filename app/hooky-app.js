@@ -4,23 +4,20 @@
 (function(){
 
   'use strict';
-//  require('dustjs-helpers');
-//  require('./lib/dust-helpers');
+  require('dustjs-helpers');
+  require('./lib/dust-helpers');
 
   const
       process = require('process'),
       express = require('express'),
       bodyParser = require('body-parser'),
       app = express(),
-//      nodemailer = require('nodemailer'),
       fs = require('fs'),
-//      markdown = require('markdown').markdown,
       request = require('request'),
       cons = require('consolidate'),
-//      fileUpload = require('express-fileupload'),
       queryString = require('query-string'),
       morgan = require('morgan'),
-//      cookieParser = require('cookie-parser'),
+
       HookModel = require('./models/hook'),
       session = require('express-session');
 
@@ -89,9 +86,54 @@
     metadata.page.description = 'About Sparkkr';
     metadata.page.class = 'meta about';
 
-    res.render('index', {
-      meta : metadata
-    });
+      HookModel.query()
+      .orderBy('id', 'desc')
+      .modify(function (builder) {
+/*
+        if (query.code) {
+          builder.where('code', query.code);
+        }
+
+        if (query.person) {
+          builder.where('secret', '0');
+          builder.orWhere('creatorID', '=', query.person);
+        }
+*/
+  //      if (query.eager) {
+  //        builder.where('code', query.code);
+  //      }
+
+  //      console.log(query);
+  /*
+        if (Object.keys(req.query).length !== 0) {
+          var key = Object.keys(req.query)[0];
+          if (key == 'person') {
+            builder.where('secret', '0');
+            builder.orWhere('creatorID', '=', req.query[key]);
+          }
+          else {
+            builder.orWhere(key, '=', req.query[key]);
+          }
+        } else {
+          builder.where('secret', '0');
+        }
+  */
+  //      console.log(builder.toString());
+
+  //      console.log(builder.toString());
+      })
+//      .eager('[creator.[image, github, instagram, twitter], icon, image]')
+      .then(function (hooks) {
+
+        res.render('index', {
+          meta : metadata,
+          hooks : hooks
+        });
+
+      })
+      .catch(function (err) {
+        res.status(500).send(err);
+      });
 
   });
 
@@ -99,13 +141,15 @@
 
     var body = req.body;
 
-      console.log(req.headers);
+      console.log(req.headers, req.body);
 
       HookModel.query().insert({
-        headers : 'HEADERS',
-        payload : 'PAYLOAD'
+        headers : JSON.stringify(req.headers),
+        payload : JSON.stringify(req.body)
       }).then(function(hook) {
-        console.log(hook);
+
+        res.status(200).send(JSON.stringify(hook, null, 2));
+
       }).catch(function(err) {
         console.log(err);
       });
