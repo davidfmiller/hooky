@@ -2,9 +2,16 @@
 {<content}
 
 {#hook}
-<h4>{@formatDate stamp=creationStamp /}</h4>
+<h4><span data-popover="{creationStamp}">{@formatDate stamp=creationStamp /}</span></h4>
 <pre>{@jsonFormat string=headers /}</pre>
 <pre>{@jsonFormat string=payload /}</pre>
+
+
+<form action="/hook/{id}/delete" method="post" class="delete">
+  <input type="hidden" name="id" value="{id}">
+  <button type="submit" data-popover="Delete this hook">Delete</button>
+</form>
+
 {/hook}
 
 {/content}

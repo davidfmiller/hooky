@@ -18,7 +18,6 @@
       queryString = require('query-string'),
       morgan = require('morgan'),
 
-
       HookModel = require('./models/hook'),
       session = require('express-session');
 
@@ -93,8 +92,6 @@
     .where('id', '=', req.params.id)
     .then(function (hook) {
 
-      console.log(hook);
-
       res.render('hook', {
         meta : metadata,
         hook : hook
@@ -104,8 +101,6 @@
     .catch(function (err) {
       res.status(500).send(err);
     });
-
-
   });
 
 
@@ -124,7 +119,6 @@
         if (query.code) {
           builder.where('code', query.code);
         }
-
         if (query.person) {
           builder.where('secret', '0');
           builder.orWhere('creatorID', '=', query.person);
@@ -135,25 +129,8 @@
   //      }
 
   //      console.log(query);
-  /*
-        if (Object.keys(req.query).length !== 0) {
-          var key = Object.keys(req.query)[0];
-          if (key == 'person') {
-            builder.where('secret', '0');
-            builder.orWhere('creatorID', '=', req.query[key]);
-          }
-          else {
-            builder.orWhere(key, '=', req.query[key]);
-          }
-        } else {
-          builder.where('secret', '0');
-        }
-  */
-  //      console.log(builder.toString());
-
   //      console.log(builder.toString());
       })
-//      .eager('[creator.[image, github, instagram, twitter], icon, image]')
       .then(function (hooks) {
 
         res.render('index', {
@@ -172,7 +149,7 @@
 
     var body = req.body;
 
-      console.log(req.headers, req.body);
+//      console.log(req.headers, req.body);
 
       HookModel.query().insert({
         headers : JSON.stringify(req.headers),
@@ -186,6 +163,24 @@
       });
 
   });
+
+  router.post('/hook/:id/delete', function getAbout(req, res) {
+
+    HookModel
+    .query()
+    .delete()
+    .where('id', req.params.id)
+    .then(function(thing) {
+
+      res.redirect(301, '/');
+
+    }).catch(function(err) {
+      console.log(err);
+      reject(err);
+    });
+
+  });
+
 
   app.use(morgan('dev')); 
   app.use(express.static(__dirname + '/static'));

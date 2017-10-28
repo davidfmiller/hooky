@@ -10,6 +10,7 @@ module.exports = function(grunt) {
       files : ['scripts/*.js'],
     },
 
+/*
     uglify: {
       js: {
         options: {
@@ -19,7 +20,7 @@ module.exports = function(grunt) {
           'public/assets/js/hooky.js': ['scripts/*.js']
         }
       }
-    },
+    },*/
 
     compass : {
       dist : {
@@ -36,11 +37,11 @@ module.exports = function(grunt) {
       css : {
         files : ['styles/*.scss'],
         tasks : ['compass']
-      },
+      }/*,
       js : {
         files : ['scripts/*.js'],
         tasks : ['jshint', 'uglify']
-      }
+      }*/
     }
   });
 

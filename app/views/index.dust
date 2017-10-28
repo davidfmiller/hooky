@@ -4,7 +4,7 @@
 <ol>
 {#hooks}
   <li>
-    <h4><a href="/hook/{id}">{@formatDate stamp=creationStamp /}</a></h4>
+    <h4><a href="/hook/{id}" data-popover="{creationStamp}" title="{creationStamp}">{@formatDate stamp=creationStamp /}</a></h4>
     <pre>{@jsonFormat string=headers /}</pre>
     <pre>{@jsonFormat string=payload /}</pre>
   </li>
