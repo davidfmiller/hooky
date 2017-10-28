@@ -6,17 +6,49 @@
   'use strict';
 
   const
+    fs = require('fs'),
     Model = require('objection').Model,
-    Knex = require('knex');
+    Knex = require('knex'),
+    process = require('process'),
+    init = {
+      db : {
+        "host" : "127.0.0.1",
+        "username" : "",
+        "password" : "",
+        "database" : "",
+        "table" : "hook",
+        "driver" : "mysql"
+      }
+    };
 
-  //var knex = new Knex({client: 'sqlite3', connection: {filename: __dirname + '/../data/sparkkr.db'}, useNullAsDefault: true});
+  try {
+
+    var path = "../hooky-config.json";
+
+    if (! fs.existsSync(path)) {
+      fs.writeFileSync(path, JSON.stringify(init));
+      process.stderr.write("🚫 Created default config file at `" + path + "`; enter database credentials and restart hooky-app\n");
+      process.exit(1);
+    }
+
+    JSON.parse(fs.readFileSync(path)).db;
+
+  } catch (e) {
+
+    process.stderr.write("🚫 Invalid config file at `" + path + "`; ex: \n" + JSON.stringify(init, null, "  ") + "\n");
+    process.exit(1);
+  }
+
+
+  var db = JSON.parse(fs.readFileSync("../hooky-config.json")).db;
+
   var knex = require('knex')({
-    client: 'mysql',
+    client: db.driver,
     connection: {
-      host : '127.0.0.1',
-      user : 'hooky',
-      password : 'eP7JzMtnidhAVkmEhsvzzsHb!',
-      database : 'hooky'
+      host : db.host,
+      user : db.username,
+      password : db.password,
+      database : db.database
     }
   });
 
@@ -25,7 +57,7 @@
   });
 
 
-  Model.tableName = 'hook';
+  Model.tableName = db.table;
   Model.jsonSchema = {
     type: 'object',
     required: ['headers', 'payload'],
