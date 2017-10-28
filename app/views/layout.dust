@@ -9,6 +9,9 @@
     <meta name="keywords" content="hooky">
     <meta name="description" content="hooky">
     <meta name="viewport" content="width=400">
+
+    <link rel="mask-icon" href="//assets/img/favicon.svg" color="rgba(0.2,0.2,0.2,1.0)">
+
 <!--
     <link href="/assets/img/favicon.ico" rel="shortcut icon">
     <link rel="apple-touch-icon" sizes="144x144" href="/assets/img/apple-touch-icon/144x144.png">
@@ -18,7 +21,7 @@
     <div id="doc">
       <header>
         <div>
-          <h1>Hooky</h1>
+          <h1><a href="/">Hooky</a></h1>
         </div>
       </header>
 

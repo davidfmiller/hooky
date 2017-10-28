@@ -8,6 +8,19 @@ body {
 h1 {
   font-weight: bold;
   margin-bottom: 10px;
+
+  a {
+    &:visited {
+      color: #000;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    text-decoration: none;
+    color: #000;
+  }
 }
 
 h4 {
