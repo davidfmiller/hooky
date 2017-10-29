@@ -1,14 +1,26 @@
 {>layout/}
 {<content}
 
-<ol>
-{#hooks}
-  <li>
-    <h4><a href="/hook/{id}" data-popover="{creationStamp}" title="{creationStamp}">{@formatDate stamp=creationStamp /}</a></h4>
-    <pre>{@jsonFormat string=headers /}</pre>
-    <pre>{@jsonFormat string=payload /}</pre>
-  </li>
+{^hooks}
+  <p>No hooks</p>
+  <form action="" method="post">
+    <fieldset>
+      <legend>Make a sample request</legend>
+    <button type="submit">Create an example</button>
+    </fieldset>
+  </form>
 {/hooks}
-</ol>
+{?hooks}
+  <ol>
+    {#hooks}
+      <li>
+        <h4><a href="/hook/{id}" data-popover="{creationStamp}" title="{creationStamp}">{@formatDate stamp=creationStamp /}</a></h4>
+        <pre>{@jsonFormat string=headers /}</pre>
+        <pre>{@jsonFormat string=payload /}</pre>
+      </li>
+    {/hooks}
+  </ol>
+{/hooks}
+
 
 {/content}
