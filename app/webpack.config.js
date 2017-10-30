@@ -15,6 +15,7 @@ const config = {
     path: path.resolve(__dirname, '../app/public/assets/js'),
     filename: 'hooky.bundle.js'
   },
+  watch : true,
   module : {
     rules : [
 /*
