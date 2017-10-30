@@ -149,8 +149,6 @@
 
     var body = req.body;
 
-//      console.log(req.headers, req.body);
-
       HookModel.query().insert({
         headers : JSON.stringify(req.headers),
         payload : JSON.stringify(req.body)
@@ -163,6 +161,18 @@
       });
 
   });
+
+  router.post('/example', function getAbout(req, res) {
+
+    request.post({url : 'http://localhost:' + port + '/', json: true, body : { 'abc' : 'def' }}, function(error, response, body) {
+      if (error || response.statusCode !== 200)  {
+        res.status(500).send(JSON.stringify(e, null, 2));
+        return;
+      }
+      res.redirect(301, '/')
+    });
+  });
+
 
   router.post('/hook/:id/delete', function getAbout(req, res) {
 
@@ -177,6 +187,20 @@
     }).catch(function(err) {
       console.log(err);
       reject(err);
+    });
+
+  });
+
+  router.post('/reset', function getAbout(req, res) {
+
+    HookModel
+    .query()
+    .delete()
+    .then(function() {
+      res.redirect(301, '/');
+    }).catch(function(err) {
+      console.log(err);
+      res.status(500).send(JSON.stringify(err));
     });
 
   });

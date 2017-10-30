@@ -26,7 +26,7 @@
     var path = "../hooky-config.json";
 
     if (! fs.existsSync(path)) {
-      fs.writeFileSync(path, JSON.stringify(init));
+      fs.writeFileSync(path, JSON.stringify(init, null, '  '));
       process.stderr.write("🚫 Created default config file at `" + path + "`; enter database credentials and restart hooky-app\n");
       process.exit(1);
     }

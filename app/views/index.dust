@@ -16,7 +16,7 @@
     </form>
   {/hooks}
   {^hooks}
-    <form action="" method="post" class="example">
+    <form action="example" method="post" class="example">
       <fieldset>
         <legend>Make a sample request</legend>
       <button type="submit">Create an example</button>
