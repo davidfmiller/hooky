@@ -12,7 +12,6 @@
 
     <meta property="og:image" content="//assets/img/og-image.png">
 
-
     <link rel="mask-icon" href="//assets/img/favicon.svg" color="rgba(0.2,0.2,0.2,1.0)">
 
 <!--
@@ -30,7 +29,10 @@
     </div>
 
     <footer>
-      A <a href="https://readmeansrun.com" title="READMEANSRUN">READMEANSRUN</a> joint    
+      <span>
+        A <a href="https://readmeansrun.com" title="READMEANSRUN" data-popover="READMEANSRUN">READMEANSRUN</a> joint
+      </span>
+
     </footer>
   </body>
 <!--

@@ -45,7 +45,9 @@ ol {
 
 footer {
 
-  color: #ddd;
+  span {
+    color: #ddd;
+  }
   text-align: right;
 
   a {
@@ -53,7 +55,7 @@ footer {
   }
 
 
-  &:hover {
+  span:hover {
     color: #888;
 
     a {

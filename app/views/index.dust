@@ -7,30 +7,32 @@
       <a href="/">Hooky</a>
     </h1>
 
-  <form action="reset" method="post" class="reset">
-    <fieldset>
-      <legend>Clear all hooks</legend>
-      <button type="submit" data-popover="Clear hooks">Clear hooks</button>
-    </fieldset>
-  </form>
+  {?hooks}
+    <form action="reset" method="post" class="reset">
+      <fieldset>
+        <legend>Clear all hooks</legend>
+        <button type="submit" data-popover="Clear hooks">Erase hooks</button>
+      </fieldset>
+    </form>
+  {/hooks}
+  {^hooks}
+    <form action="" method="post" class="example">
+      <fieldset>
+        <legend>Make a sample request</legend>
+      <button type="submit">Create an example</button>
+      </fieldset>
+    </form>
 
-    
-    
+  {/hooks}
+
   </div>
 </header>
 
 
 {^hooks}
   <p>No hooks</p>
-  <form action="" method="post" class="example">
-    <fieldset>
-      <legend>Make a sample request</legend>
-    <button type="submit">Create an example</button>
-    </fieldset>
-  </form>
 {/hooks}
 {?hooks}
-
 
   <ol>
     {#hooks}
