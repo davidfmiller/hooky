@@ -2,15 +2,27 @@
 {<content}
 
 {#hook}
+
+<header>
+  <div>
+    <h1><a href="/">Hooky</a> #{id}</h1>
+
+    <form action="/hook/{id}/delete" method="post" class="delete">
+      <fieldset>
+        <legend>Delete this hook</legend>
+        <input type="hidden" name="id" value="{id}">
+        <button type="submit" data-popover="Delete this hook">Delete</button>
+      </fieldset>
+    </form>
+
+  </div>
+</header>
+
 <h4><span data-popover="{creationStamp}">{@formatDate stamp=creationStamp /}</span></h4>
 <pre>{@jsonFormat string=headers /}</pre>
 <pre>{@jsonFormat string=payload /}</pre>
 
 
-<form action="/hook/{id}/delete" method="post" class="delete">
-  <input type="hidden" name="id" value="{id}">
-  <button type="submit" data-popover="Delete this hook">Delete</button>
-</form>
 
 {/hook}
 

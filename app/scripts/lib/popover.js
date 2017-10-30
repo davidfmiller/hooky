@@ -276,8 +276,6 @@
       'class' : ''
     };
 
-    console.log('CONFIG!', config);
-
     config = merge(defaultConfig, config);
     this.defaults = merge(defaultProperties, defaults);
 

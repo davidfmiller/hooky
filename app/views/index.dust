@@ -1,9 +1,28 @@
 {>layout/}
 {<content}
 
+<header>
+  <div>
+    <h1>
+      <a href="/">Hooky</a>
+    </h1>
+
+  <form action="reset" method="post" class="reset">
+    <fieldset>
+      <legend>Clear all hooks</legend>
+      <button type="submit" data-popover="Clear hooks">Clear hooks</button>
+    </fieldset>
+  </form>
+
+    
+    
+  </div>
+</header>
+
+
 {^hooks}
   <p>No hooks</p>
-  <form action="" method="post">
+  <form action="" method="post" class="example">
     <fieldset>
       <legend>Make a sample request</legend>
     <button type="submit">Create an example</button>
@@ -11,6 +30,8 @@
   </form>
 {/hooks}
 {?hooks}
+
+
   <ol>
     {#hooks}
       <li>

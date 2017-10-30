@@ -12,6 +12,7 @@
   };
 
   var popover = new window.Hooky.Popover(null, {position: "side", color : "rgba(0,0,0,0.9)"});
+/*
   popover.on(
     'pop',
     function(target, popover) { window.console.log('pop', target, popover); }
@@ -19,5 +20,5 @@
     'unpop',
     function(target, popover) { window.console.log('unpop', target, popover); }
   );
-
+*/
 }());

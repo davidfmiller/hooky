@@ -22,11 +22,6 @@
   </head>
   <body>
     <div id="doc">
-      <header>
-        <div>
-          <h1><a href="/">Hooky</a></h1>
-        </div>
-      </header>
 
       {+content}
         This is the base content.
