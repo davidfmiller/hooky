@@ -1,5 +1,5 @@
 /*jshint esnext:true */
-/* globals require, console, __dirname */
+/* globals require, module, console, __dirname */
 
 (function(){
 
@@ -18,8 +18,8 @@
       queryString = require('query-string'),
       morgan = require('morgan'),
 
-      HookModel = require('./models/hook'),
-      session = require('express-session');
+      HookModel = require('./models/hook');
+//      session = require('express-session');
 
 
 
@@ -103,6 +103,26 @@
     });
   });
 
+  router.get('/hook/:id/raw', function getAbout(req, res) {
+
+    HookModel.query()
+    .where('id', '=', req.params.id)
+    .then(function (hooks) {
+      
+      if (hooks.length == 0) {
+        res.status(404).send('Not found');
+        return;
+      }
+    
+//      console.log(hooks[0].payload);
+      res.status(200).send(JSON.parse(hooks[0].payload), null, ' ');
+    })
+    .catch(function (err) {
+      res.status(500).send(err);
+    });
+  });
+
+
 
   router.get('/', function getAbout(req, res) {
 
@@ -159,12 +179,19 @@
       }).catch(function(err) {
         console.log(err);
       });
-
   });
 
   router.post('/example', function getAbout(req, res) {
 
-    request.post({url : 'http://localhost:' + port + '/', json: true, body : { 'abc' : 'def' }}, function(error, response, body) {
+    var obj = {
+      'rmr' : {
+        'hooky' : 'https://github.com/davidfmiller/hooky',
+        'home' : 'https://readmeansrun.com',
+        'safari' : 'https://readmeansrun.com/code/readmeansafari/'
+      }
+    };
+
+    request.post({url : 'http://localhost:' + port + '/', json: true, body : obj}, function(error, response, body) {
       if (error || response.statusCode !== 200)  {
         res.status(500).send(JSON.stringify(e, null, 2));
         return;
