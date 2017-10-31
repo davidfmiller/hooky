@@ -38,7 +38,7 @@
     {#hooks}
       <li>
         <h4><a href="/hook/{id}" data-popover="{creationStamp}" title="{creationStamp}">{@formatDate stamp=creationStamp /}</a></h4>
-        <pre>{@jsonFormat string=headers /}</pre>
+        {@table object=headers /}
         <pre>{@jsonFormat string=payload /}</pre>
       </li>
     {/hooks}

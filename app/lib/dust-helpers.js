@@ -43,6 +43,40 @@ dust.helpers.i18n = function(chunk, context, bodies, params) {
   return chunk;
 };
 
+/**
+
+ */
+dust.helpers.table = function(chunk, context, bodies, params) {
+
+
+  try {
+    const
+      obj = JSON.parse(params.object),
+  //    profile = params.profile,
+      body = bodies.block;
+
+    chunk.write('<table class="headers"><thead><tr><th>Key</th><th>Value</th></tr></thead><tbody>');
+    for (var i in obj) {
+      if (! obj.hasOwnProperty(i)) {
+        continue;
+      }
+      chunk.write(
+        '<tr><th>' + i + '</th><td>: ' + obj[i] + '</td></tr>'
+      );
+    }
+
+    chunk.write('</tbody></table>');
+
+  } catch(e) {
+    chunk.write(params.string);
+    return chunk;
+  }
+
+//  chunk.render(body, context);
+
+  return chunk;
+};
+
 
 /**
 

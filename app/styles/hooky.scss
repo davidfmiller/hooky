@@ -100,5 +100,12 @@ form {
 
 }
 
+table.headers {
+  thead {
+    display: none;
+  }
+
+}
+
 @import "lib/popover.scss";
 @import "lib/pre.scss";
