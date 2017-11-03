@@ -27,6 +27,7 @@ h1 {
 
 h4 {
   font-size: 12px;
+  margin-bottom: 1em;
 }
 
 ol {
@@ -68,7 +69,7 @@ footer {
 }
 
 header {
-  padding-bottom: 20px;
+  margin-bottom: 1.5em;
 
   form {
     display: inline;
@@ -82,7 +83,10 @@ header {
 
 form {
 
+  a.button,
   button {
+    text-decoration: none;
+    color: #000;
     padding: 5px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -97,10 +101,18 @@ form {
       border-color: #888;
     }
   }
-
+  
+  margin-bottom: 1em;
 }
 
 table.headers {
+  
+  font-family: monospace;
+  
+  td {
+    padding-left: 1rem;
+  }
+  
   thead {
     display: none;
   }

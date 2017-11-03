@@ -11,10 +11,10 @@
       <fieldset>
         <legend>Delete this hook</legend>
         <input type="hidden" name="id" value="{id}">
-        <button type="submit" data-popover="Delete this hook">Delete</button>
+        <button type="submit" data-popover='{"content":"Delete this hook","position":"top"}'>Delete</button>
       </fieldset>
     </form>
-    
+
     <a href="/hook/{id}/raw">Raw</a>
 
   </div>
