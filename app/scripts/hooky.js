@@ -22,7 +22,6 @@
     });
   }
   
-
   var popover = new window.Hooky.Popover(null, {position: "side", color : "rgba(0,0,0,0.9)"});
 /*
   popover.on(
@@ -34,7 +33,14 @@
   );
 */
 
-
+    var fields = document.querySelectorAll('pre > span.field');
+    for (var i in fields) {
+      if (! fields.hasOwnProperty(i)) {
+        continue;
+      }
+      var span = fields[i];
+      span.classList.add('collapsed');
+    }
 
     var
     toggler = function(e) {

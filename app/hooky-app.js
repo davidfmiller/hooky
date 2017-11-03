@@ -188,6 +188,11 @@
         'hooky' : 'https://github.com/davidfmiller/hooky',
         'home' : 'https://readmeansrun.com',
         'safari' : 'https://readmeansrun.com/code/readmeansafari/'
+      },
+      'links' : {
+        'strava' : 'https://strava.com/',
+        'youtube' : 'https://www.youtube.com/channel/UCf6hm45A9tlsbn11q9loYCw?view_as=subscriber',
+        'flickr' : 'https://www.flickr.com/photos/davidfmiller/'
       }
     };
 
