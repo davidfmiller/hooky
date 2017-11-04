@@ -38,8 +38,10 @@
       if (! fields.hasOwnProperty(i)) {
         continue;
       }
-      var span = fields[i];
-      span.classList.add('collapsed');
+      var span = fields[i], toggle = span.querySelector('span.toggle');
+      if (toggle && toggle.parentNode == span) {
+        span.classList.add('collapsed');
+      }
     }
 
     var
