@@ -73,7 +73,7 @@
   app.set('views', __dirname + '/views');
   app.set('view engine', template_engine);
 
-  app.use(function(req, res, next) {
+  app.use(function _use(req, res, next) {
     next();
   });
 
@@ -90,7 +90,7 @@
 
     HookModel.query()
     .where('id', '=', req.params.id)
-    .then(function (hook) {
+    .then(function _then(hook) {
 
       res.render('hook', {
         meta : metadata,
@@ -98,7 +98,7 @@
       });
 
     })
-    .catch(function (err) {
+    .catch(function _catch(err) {
       res.status(500).send(err);
     });
   });
@@ -107,7 +107,7 @@
 
     HookModel.query()
     .where('id', '=', req.params.id)
-    .then(function (hooks) {
+    .then(function _then(hooks) {
       
       if (hooks.length == 0) {
         res.status(404).send('Not found');
@@ -117,7 +117,7 @@
 //      console.log(hooks[0].payload);
       res.status(200).send(JSON.parse(hooks[0].payload), null, ' ');
     })
-    .catch(function (err) {
+    .catch(function _catch(err) {
       res.status(500).send(err);
     });
   });
@@ -134,7 +134,7 @@
 
       HookModel.query()
       .orderBy('id', 'desc')
-      .modify(function (builder) {
+      .modify(function _modify(builder) {
 /*
         if (query.code) {
           builder.where('code', query.code);
@@ -151,7 +151,7 @@
   //      console.log(query);
   //      console.log(builder.toString());
       })
-      .then(function (hooks) {
+      .then(function _then(hooks) {
 
         res.render('index', {
           meta : metadata,
@@ -159,7 +159,7 @@
         });
 
       })
-      .catch(function (err) {
+      .catch(function _catch(err) {
         res.status(500).send(err);
       });
 
@@ -169,14 +169,16 @@
 
     var body = req.body;
 
+      console.log(req.body);
+
       HookModel.query().insert({
         headers : JSON.stringify(req.headers),
         payload : JSON.stringify(req.body)
-      }).then(function(hook) {
+      }).then(function _then(hook) {
 
         res.status(200).send(JSON.stringify(hook, null, 2));
 
-      }).catch(function(err) {
+      }).catch(function _catch(err) {
         console.log(err);
       });
   });
@@ -196,7 +198,7 @@
       }
     };
 
-    request.post({url : 'http://localhost:' + port + '/', json: true, body : obj}, function(error, response, body) {
+    request.post({url : 'http://localhost:' + port + '/', json: true, body : obj}, function _post(error, response, body) {
       if (error || response.statusCode !== 200)  {
         res.status(500).send(JSON.stringify(e, null, 2));
         return;
@@ -212,11 +214,11 @@
     .query()
     .delete()
     .where('id', req.params.id)
-    .then(function(thing) {
+    .then(function _then(thing) {
 
       res.redirect(301, '/');
 
-    }).catch(function(err) {
+    }).catch(function _catch(err) {
       console.log(err);
       reject(err);
     });
@@ -228,9 +230,9 @@
     HookModel
     .query()
     .delete()
-    .then(function() {
+    .then(function _then() {
       res.redirect(301, '/');
-    }).catch(function(err) {
+    }).catch(function _catch(err) {
       console.log(err);
       res.status(500).send(JSON.stringify(err));
     });
