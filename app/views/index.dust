@@ -43,7 +43,9 @@
           <fieldset>
             <legend>Delete this hook</legend>
             <input type="hidden" name="id" value="{id}">
-            <button type="submit" data-popover='{"content":"Delete this hook","position":"top"}'>Delete</button> <a class="button" href="/hook/{id}/raw" data-popover='{"content":"View raw response","position":"top"}'>Raw</a>
+            <button type="submit" data-popover='{"content":"Delete this hook","position":"top"}'>Delete</button>
+            <a class="button" href="/hook/{id}/raw" data-popover='{"content":"View raw hook","position":"top"}'>Raw</a>
+            <a class="button" href="/hook/{id}/download" data-popover='{"content":"Download this hook","position":"top"}'>Download</a>
           </fieldset>
         </form>
 

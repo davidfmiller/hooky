@@ -80,7 +80,7 @@
   app.use(morgan('dev')); 
   app.use(express.static(__dirname + '/public'));
 
-  router.get('/hook/:id', function getAbout(req, res) {
+  router.get('/hook/:id', function getHook(req, res) {
 
     resetMetadata(req);
 
@@ -103,7 +103,7 @@
     });
   });
 
-  router.get('/hook/:id/raw', function getAbout(req, res) {
+  router.get('/hook/:id/raw', function getRaw(req, res) {
 
     HookModel.query()
     .where('id', '=', req.params.id)
@@ -122,9 +122,32 @@
     });
   });
 
+  router.get('/hook/:id/download', function getDownload(req, res) {
+
+    HookModel.query()
+    .where('id', '=', req.params.id)
+    .then(function _then(hooks) {
+      
+      if (hooks.length == 0) {
+        res.status(404).send('Not found');
+        return;
+      }
+
+      res.setHeader('Content-Disposition', 'attachment; filename=hook-' + req.params.id + '.json');
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).send(JSON.stringify(JSON.parse(hooks[0].body), null, '  '));
+
+//      console.log(hooks[0].body);
+//      res.status(200).send(JSON.parse(hooks[0].body), null, ' ');
+    })
+    .catch(function _catch(err) {
+      res.status(500).send(err);
+    });
+  });
 
 
-  router.get('/', function getAbout(req, res) {
+
+  router.get('/', function getIndex(req, res) {
 
     resetMetadata(req);
 
@@ -165,7 +188,7 @@
 
   });
 
-  router.post('/', function getAbout(req, res) {
+  router.post('/', function postIndex(req, res) {
 
     var body = req.body;
 
@@ -183,7 +206,7 @@
       });
   });
 
-  router.post('/example', function getAbout(req, res) {
+  router.post('/example', function postExample(req, res) {
 
     var obj = {
       'rmr' : {
@@ -208,7 +231,7 @@
   });
 
 
-  router.post('/hook/:id/delete', function getAbout(req, res) {
+  router.post('/hook/:id/delete', function postDelete(req, res) {
 
     HookModel
     .query()
@@ -225,7 +248,7 @@
 
   });
 
-  router.post('/reset', function getAbout(req, res) {
+  router.post('/reset', function postReset(req, res) {
 
     HookModel
     .query()
