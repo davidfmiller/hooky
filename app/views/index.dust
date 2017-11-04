@@ -48,7 +48,7 @@
         </form>
 
         {@table object=headers /}
-        <pre>{@jsonFormat string=payload /}</pre>
+        <pre>{@jsonFormat string=body /}</pre>
       </li>
     {/hooks}
   </ol>

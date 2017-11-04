@@ -60,12 +60,12 @@
   Model.tableName = db.table;
   Model.jsonSchema = {
     type: 'object',
-    required: ['headers', 'payload'],
+    required: ['headers', 'body'],
 
     properties: {
       id: { type: 'integer' },
       headers: { type: 'string'},
-      payload: { type: 'string' },
+      body: { type: 'string' },
       creationStamp: { type: 'string' }
     }
   };

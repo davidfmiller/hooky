@@ -114,8 +114,8 @@
         return;
       }
     
-//      console.log(hooks[0].payload);
-      res.status(200).send(JSON.parse(hooks[0].payload), null, ' ');
+//      console.log(hooks[0].body);
+      res.status(200).send(JSON.parse(hooks[0].body), null, ' ');
     })
     .catch(function _catch(err) {
       res.status(500).send(err);
@@ -173,7 +173,7 @@
 
       HookModel.query().insert({
         headers : JSON.stringify(req.headers),
-        payload : JSON.stringify(req.body)
+        body : JSON.stringify(req.body)
       }).then(function _then(hook) {
 
         res.status(200).send(JSON.stringify(hook, null, 2));
