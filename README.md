@@ -11,6 +11,4 @@ A simple tool for logging webhooks
 ## todo
 
 - handle xml
-- postgres
-
 
