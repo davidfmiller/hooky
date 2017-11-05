@@ -76,7 +76,7 @@ header {
   }
 
   fieldset {
-    padding-left: 10px;
+    padding-left: 5px;
     display: inline;
   }
 }
@@ -112,6 +112,12 @@ form {
 
   a.button {
     margin: 0 5px;
+  }
+  
+  fieldset {
+    button:last-child {
+      margin-left: 5px;
+    }
   }
 
   margin-bottom: 1em;

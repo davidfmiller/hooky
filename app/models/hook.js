@@ -88,9 +88,8 @@
 
   Hook.tableName = 'hook';
 
-
   Hook.prototype.$afterGet = function() {
-    //this.url = 'https://' + this.bucket + '.s3.amazonaws.com/' + this.name;
+    this.url = 'https://' + this.bucket + '.s3.amazonaws.com/' + this.name;
   };
 
   Hook.prototype.$beforeInsert = function () {

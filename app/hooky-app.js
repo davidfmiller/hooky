@@ -192,18 +192,18 @@
 
     var body = req.body;
 
-      console.log(req.body);
+    console.log(req.body);
 
-      HookModel.query().insert({
-        headers : JSON.stringify(req.headers),
-        body : JSON.stringify(req.body)
-      }).then(function _then(hook) {
+    HookModel.query().insert({
+      headers : JSON.stringify(req.headers),
+      body : JSON.stringify(req.body)
+    }).then(function _then(hook) {
 
-        res.status(200).send(JSON.stringify(hook, null, 2));
+      res.status(200).send(JSON.stringify(hook, null, 2));
 
-      }).catch(function _catch(err) {
-        console.log(err);
-      });
+    }).catch(function _catch(err) {
+      console.log(err);
+    });
   });
 
   router.post('/example', function postExample(req, res) {

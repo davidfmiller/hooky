@@ -45,7 +45,17 @@
     }
   }
 
-//  var copys = document.querySelectorAll('button.copy');
+  var
+  copys = document.querySelectorAll('button.copy'),
+  preventDefault = function(e) {
+    e.preventDefault();
+  };
+
+  for (var i in copys) {
+    if (! copys.hasOwnProperty(i)) { continue; }
+    copys[i].addEventListener('click', preventDefault);
+  }
+
   var clipboard = new window.Hooky.Clipboard('button.copy');
 /*
   clipboard.on('success', function(e) {

@@ -47,10 +47,10 @@
             <button type="submit" data-popover='{"content":"Delete this hook","position":"top"}'>Delete</button>
             <a class="button" href="/hook/{id}/raw" data-popover='{"content":"View raw hook","position":"top"}'>Raw</a>
             <a class="button" href="/hook/{id}/download" data-popover='{"content":"Download this hook","position":"top"}'>Download</a>
-
+            <button class="copy" data-clipboard-target="#hook-{id}-textarea" data-popover='{"content":"Copy to clipboard","position":"top"}'>Copy</button>
           </fieldset>
         </form>
-            <button class="copy" data-clipboard-target="#hook-{id}-textarea" data-popover='{"content":"Copy to clipboard","position":"top"}'>Copy</button>
+
         {@table object=headers /}
         <pre>{@jsonFormat string=body tags=1 /}</pre>
       </li>
