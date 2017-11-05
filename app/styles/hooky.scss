@@ -81,6 +81,14 @@ header {
   }
 }
 
+textarea {
+  position: absolute;
+  left: -1000px;
+  top: 10000px;
+  z-index: -1;
+}
+
+
 form {
 
   a.button,
@@ -95,7 +103,7 @@ form {
     font-weight: normal;
     font-size: 11px;
     transition: background-color 0.2s, border 0.2s;
-
+    margin-right: 5px;
     &:hover {
       background: #ddd;
       border-color: #888;
@@ -103,9 +111,9 @@ form {
   }
 
   a.button {
-    margin-left: 5px;
+    margin: 0 5px;
   }
-  
+
   margin-bottom: 1em;
 }
 

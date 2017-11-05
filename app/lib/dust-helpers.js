@@ -83,6 +83,16 @@ dust.helpers.table = function(chunk, context, bodies, params) {
  */
 dust.helpers.jsonFormat = function(chunk, context, bodies, params) {
 
+  const
+    obj = JSON.parse(params.string),
+    body = bodies.block;
+
+  // if we don't need all the <html> tags...
+  if (parseInt(params.tags, 10) == 0) {
+    chunk.write(JSON.stringify(obj, null, '  '));
+    return chunk;
+  }
+
   var
   b64EncodeUnicode = function(str) { return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) { return String.fromCharCode('0x' + p1); })); },
   isFunction= function(o) { return typeof o === 'function';},
@@ -372,10 +382,6 @@ dust.helpers.jsonFormat = function(chunk, context, bodies, params) {
 
 
   try {
-    const
-      obj = JSON.parse(params.string),
-  //    profile = params.profile,
-      body = bodies.block;
 
     chunk.write(
       _stringify(obj, "  ")

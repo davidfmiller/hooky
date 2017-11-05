@@ -7,7 +7,8 @@
 
   window.Hooky = {
   //  vue : require('./lib/vue.min.js'),
-    Popover : require('./lib/popover')
+    Popover : require('./lib/popover'),
+    Clipboard : require('./lib/clipboard')
   //  screen : require('./lib/fullscreen'),
   //  backdrop : require('./lib/backdrop')
   };
@@ -33,69 +34,104 @@
   );
 */
 
-    var fields = document.querySelectorAll('pre > span.field');
-    for (var i in fields) {
-      if (! fields.hasOwnProperty(i)) {
-        continue;
-      }
-      var span = fields[i], toggle = span.querySelector('span.toggle');
-      if (toggle && toggle.parentNode == span) {
-        span.classList.add('collapsed');
-      }
+  var fields = document.querySelectorAll('pre > span.field');
+  for (var i in fields) {
+    if (! fields.hasOwnProperty(i)) {
+      continue;
+    }
+    var span = fields[i], toggle = span.querySelector('span.toggle');
+    if (toggle && toggle.parentNode == span) {
+      span.classList.add('collapsed');
+    }
+  }
+
+//  var copys = document.querySelectorAll('button.copy');
+  var clipboard = new window.Hooky.Clipboard('button.copy');
+/*
+  clipboard.on('success', function(e) {
+    console.info('Action:', e.action);
+    console.info('Text:', e.text);
+    console.info('Trigger:', e.trigger);
+
+//    e.clearSelection();
+});
+
+//alert(window.Hooky.Clipboard.isSupported());
+
+clipboard.on('error', function(e) {
+  console.error('Action:', e.action);
+  console.error('Trigger:', e.trigger);
+});
+
+  
+  /*
+  for (var i in copys) {
+    if (! copys.hasOwnProperty(i)) { continue; }
+    
+    var button = copys[i];
+    button.addEventListener('click', function(e) {
+
+      var textarea = e.target.parentNode.parentNode.querySelector('textarea');
+
+      e.preventDefault();
+
+      console.log(form);
+    });
+  }
+*/
+
+  var
+  toggler = function(e) {
+    var n = e.target.parentNode,
+        needle = 'collapsed';
+
+    while (n && n.className.indexOf('field') < 0) { n = n.parentNode; }
+    if (! n) { return; }
+
+    if (n.className.indexOf(needle) >= 0) {
+      n.className = 'field';
+    } else {
+      n.className += ' ' + needle;
+    }
+  },
+
+  hover = function(e) {
+    var n = e.target.parentNode;
+    while (n && n.className.indexOf('field') < 0) { n = n.parentNode; }
+    n.className = n.className.trim() + ' hover';
+  },
+
+  blur = function(e) {
+
+    var n = e.target.parentNode;
+    while (n && n.className.indexOf('field') < 0) {
+      n = n.parentNode;
     }
 
-    var
-    toggler = function(e) {
-      var n = e.target.parentNode,
-          needle = 'collapsed';
+    n.className = n.className.replace(/hover/gi, '').trim();
+  },
 
-      while (n && n.className.indexOf('field') < 0) { n = n.parentNode; }
-      if (! n) { return; }
+  toggles = document.getElementsByClassName('toggle'),
+  abbrs = document.getElementsByTagName('abbr'),
+  objs = document.getElementsByClassName('obj'),
+  open = [],
+  close = [],
+  i = 0;
 
-      if (n.className.indexOf(needle) >= 0) {
-        n.className = 'field';
-      } else {
-        n.className += ' ' + needle;
-      }
-    },
+  for (; i < toggles.length; i++) {
+    toggles[i].addEventListener('click', toggler);
+  }
 
-    hover = function(e) {
-      var n = e.target.parentNode;
-      while (n && n.className.indexOf('field') < 0) { n = n.parentNode; }
-      n.className = n.className.trim() + ' hover';
-    },
+  for (i = 0; i < abbrs.length; i++) {
+    abbrs[i].addEventListener('click', toggler);
+    abbrs[i].addEventListener('mouseover', hover);
+    abbrs[i].addEventListener('mouseout', blur);
+  }
 
-    blur = function(e) {
-
-      var n = e.target.parentNode;
-      while (n && n.className.indexOf('field') < 0) {
-        n = n.parentNode;
-      }
-
-      n.className = n.className.replace(/hover/gi, '').trim();
-    },
-
-    toggles = document.getElementsByClassName('toggle'),
-    abbrs = document.getElementsByTagName('abbr'),
-    objs = document.getElementsByClassName('obj'),
-    open = [],
-    close = [],
-    i = 0;
-
-    for (; i < toggles.length; i++) {
-      toggles[i].addEventListener('click', toggler);
-    }
-
-    for (i = 0; i < abbrs.length; i++) {
-      abbrs[i].addEventListener('click', toggler);
-      abbrs[i].addEventListener('mouseover', hover);
-      abbrs[i].addEventListener('mouseout', blur);
-    }
-
-    for (i = 0; i < objs.length; i++) {
-      objs[i].addEventListener('click', toggler);
-      objs[i].addEventListener('mouseover', hover);
-      objs[i].addEventListener('mouseout', blur);
-    }
+  for (i = 0; i < objs.length; i++) {
+    objs[i].addEventListener('click', toggler);
+    objs[i].addEventListener('mouseover', hover);
+    objs[i].addEventListener('mouseout', blur);
+  }
 
 }());
