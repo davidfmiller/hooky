@@ -77,21 +77,7 @@ dust.helpers.table = function(chunk, context, bodies, params) {
   return chunk;
 };
 
-
-/**
-
- */
-dust.helpers.jsonFormat = function(chunk, context, bodies, params) {
-
-  const
-    obj = JSON.parse(params.string),
-    body = bodies.block;
-
-  // if we don't need all the <html> tags...
-  if (parseInt(params.tags, 10) == 0) {
-    chunk.write(JSON.stringify(obj, null, '  '));
-    return chunk;
-  }
+var _jsonFormat = function(obj) {
 
   var
   b64EncodeUnicode = function(str) { return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) { return String.fromCharCode('0x' + p1); })); },
@@ -380,18 +366,34 @@ dust.helpers.jsonFormat = function(chunk, context, bodies, params) {
   // character escape sequence.
   _CHAR_COUNT, _CACHE_THRESHOLD;
 
+  return _stringify(obj, "  ");
+}
+
+/**
+
+ */
+dust.helpers.bodyFormat = function(chunk, context, bodies, params) {
+
+  const
+    obj = JSON.parse(params.string) //params.type == 'json' ? JSON.parse(params.string) : params.string,
+  ;
+
+  console.log(params.type);
+
+  // if we don't need all the <html> tags...
+  if (parseInt(params.tags, 10) == 0) {
+    chunk.write(JSON.stringify(obj, null, '  '));
+    return chunk;
+  }
 
   try {
-
     chunk.write(
-      _stringify(obj, "  ")
+      _jsonFormat(obj)
     );
   } catch(e) {
     chunk.write(params.string);
     return chunk;
   }
-
-//  chunk.render(body, context);
 
   return chunk;
 };

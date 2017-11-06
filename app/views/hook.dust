@@ -22,7 +22,7 @@
 
 <h4><span data-popover="{creationStamp}">{@formatDate stamp=creationStamp /}</span></h4>
 {@table object=headers /}
-<pre>{@jsonFormat string=body /}</pre>
+<pre>{@bodyFormat string=body /}</pre>
 
 
 

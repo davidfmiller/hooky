@@ -67,6 +67,26 @@
   app.engine('dust', cons.dust);
 
   app.use(bodyParser.json())
+  app.use(function(req, res, next) {
+
+    if (req.headers['content-type'] != 'text/xml') {
+      next();
+      return;
+    }
+
+    req.rawBody = '';
+//    req.setEncoding('utf8');
+
+    req.on('data', function(chunk) { 
+      req.rawBody += chunk;
+    });
+
+    req.on('end', function(chunk) { 
+      next();
+    });
+
+  });
+
 
   app.set('template_engine', template_engine);
 //  app.set('domain', domain);
@@ -113,9 +133,25 @@
         res.status(404).send('Not found');
         return;
       }
-    
+
+      var
+      hook = hooks[0],
+      content = hook.body,
+      mime = 'text/plain';
+
+      switch (hook.type) {
+        case 'json':
+          mime = 'application/json';
+          content = JSON.stringify(JSON.parse(hook.body), null, '  ');
+          break;
+        case 'xml':
+          mime = 'text/xml';
+          break;
+      }
+
+      res.setHeader('Content-Type', mime);
 //      console.log(hooks[0].body);
-      res.status(200).send(JSON.parse(hooks[0].body), null, ' ');
+      res.status(200).send(content);
     })
     .catch(function _catch(err) {
       res.status(500).send(err);
@@ -133,12 +169,28 @@
         return;
       }
 
-      res.setHeader('Content-Disposition', 'attachment; filename=hook-' + req.params.id + '.json');
-      res.setHeader('Content-Type', 'application/json');
-      res.status(200).send(JSON.stringify(JSON.parse(hooks[0].body), null, '  '));
+      var
+      hook = hooks[0],
+      content = hook.body,
+      extension = 'txt',
+      mime = 'text/plain';
 
-//      console.log(hooks[0].body);
-//      res.status(200).send(JSON.parse(hooks[0].body), null, ' ');
+      switch (hook.type) {
+        case 'json':
+          mime = 'application/json';
+          content = JSON.stringify(JSON.parse(hook.body), null, '  ');
+          extension = 'json';
+          break;
+        case 'xml':
+          mime = 'text/xml';
+          extension = 'xml';
+          break;
+      }
+
+      res.setHeader('Content-Disposition', 'attachment; filename=hook-' + req.params.id + '.' + extension);
+      res.setHeader('Content-Type', mime);
+
+      res.status(200).send(content);
     })
     .catch(function _catch(err) {
       res.status(500).send(err);
@@ -192,11 +244,16 @@
 
     var body = req.body;
 
-    console.log(req.body);
+//    console.log(req.body);
+//    console.log(req.rawBody);
+
+//    res.status(200).send(req.rawBody);
+//    return;
 
     HookModel.query().insert({
       headers : JSON.stringify(req.headers),
-      body : JSON.stringify(req.body)
+      body : JSON.stringify(req.body),
+      type : 'json'
     }).then(function _then(hook) {
 
       res.status(200).send(JSON.stringify(hook, null, 2));

@@ -1,0 +1,10 @@
+{
+  "db": {
+    "host": "127.0.0.1",
+    "username": "hooky",
+    "password": "eP7JzMtnidhAVkmEhsvzzsHb!",
+    "database": "hooky",
+    "table": "hook",
+    "driver": "mysql"
+  }
+}

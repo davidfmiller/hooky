@@ -13,7 +13,8 @@ CREATE TABLE hook(
   id INT NOT NULL AUTO_INCREMENT,
 
   headers TEXT,
-  payload TEXT,
+  body TEXT,
+  type ENUM('text', 'json', 'xml') DEFAULT 'text',
   creationStamp DATETIME DEFAULT CURRENT_TIMESTAMP, 
 
   PRIMARY KEY(id)

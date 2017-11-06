@@ -40,7 +40,7 @@
         <h4><a href="/hook/{id}" data-popover="{creationStamp}" title="{creationStamp}">{@formatDate stamp=creationStamp /}</a></h4>
 
         <form action="/hook/{id}/delete" method="post" class="delete">
-          <textarea id="hook-{id}-textarea">{@jsonFormat string=body tags=0 /}</textarea>
+          <textarea id="hook-{id}-textarea">{@bodyFormat string=body tags=0 type=type /}</textarea>
           <fieldset>
             <legend>Delete this hook</legend>
             <input type="hidden" name="id" value="{id}">
@@ -52,7 +52,7 @@
         </form>
 
         {@table object=headers /}
-        <pre>{@jsonFormat string=body tags=1 /}</pre>
+        <pre>{@bodyFormat string=body tags=1 type=type /}</pre>
       </li>
     {/hooks}
   </ol>

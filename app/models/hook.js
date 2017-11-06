@@ -66,6 +66,7 @@
       id: { type: 'integer' },
       headers: { type: 'string'},
       body: { type: 'string' },
+      type: { type: 'string' },
       creationStamp: { type: 'string' }
     }
   };

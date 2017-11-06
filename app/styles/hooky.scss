@@ -124,13 +124,26 @@ form {
 }
 
 table.headers {
-  
+
+  width: 100%;
   font-family: monospace;
-  
+
   td {
     padding-left: 1rem;
   }
-  
+
+  tbody {
+    & th, & td {
+      border-bottom: 1px solid #f8f8f8;
+      padding: 3px 0;
+    }
+    th {
+      width: 1%;
+      white-space: nowrap;
+      padding-right: 1rem;
+    }
+  }
+
   thead {
     display: none;
   }

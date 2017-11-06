@@ -1,0 +1,10 @@
+{
+  "db": {
+    "host": "127.0.0.1",
+    "username": "dave",
+    "password": "",
+    "database": "dave",
+    "table": "hook",
+    "driver": "pg"
+  }
+}
