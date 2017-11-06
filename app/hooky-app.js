@@ -290,7 +290,7 @@
       }
     };
 
-    request.post({url : 'http://localhost:' + port + '/', json: true, body : obj}, function _post(error, response, body) {
+    request.post({url : 'http://localhost:' + port + '/', json: true, body : obj, headers : { 'User-Agent' : 'hooky' }}, function _post(error, response, body) {
       if (error || response.statusCode !== 200)  {
         res.status(500).send(JSON.stringify(e, null, 2));
         return;

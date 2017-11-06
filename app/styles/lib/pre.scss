@@ -35,9 +35,11 @@ pre {
     display: none;
   }
 
-
   .key {
     color: blue;
+    &.obj {
+      cursor: pointer;
+    }
   }
 
   .str {
