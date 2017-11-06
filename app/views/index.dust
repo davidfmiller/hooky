@@ -37,10 +37,9 @@
   <ol>
     {#hooks}
       <li>
-        <h4><a href="/hook/{id}" data-popover="{creationStamp}" title="{creationStamp}">{@formatDate stamp=creationStamp /}</a></h4>
-
+        <h4><a href="/hook/{id}" data-popover="{creationStamp}" title="{creationStamp}">{@formatDate stamp=creationStamp /}</a> <em class="hook-{type}">{type}</em></h4>
         <form action="/hook/{id}/delete" method="post" class="delete">
-          <textarea id="hook-{id}-textarea">{@bodyFormat string=body tags=0 type=type /}</textarea>
+          <textarea id="hook-{id}-textarea">{@bodyFormat string=body escape=1 type=type /}</textarea>
           <fieldset>
             <legend>Delete this hook</legend>
             <input type="hidden" name="id" value="{id}">
@@ -52,7 +51,7 @@
         </form>
 
         {@table object=headers /}
-        <pre>{@bodyFormat string=body tags=1 type=type /}</pre>
+        <pre>{@bodyFormat string=body escape=1 type=type /}</pre>
       </li>
     {/hooks}
   </ol>

@@ -69,7 +69,7 @@
   app.use(bodyParser.json())
   app.use(function(req, res, next) {
 
-    if (req.headers['content-type'] != 'text/xml') {
+    if (req.headers['content-type'] == 'application/json') {
       next();
       return;
     }
@@ -242,8 +242,28 @@
 
   router.post('/', function postIndex(req, res) {
 
-    var body = req.body;
+    var
+    body = req.body,
+    type = 'text',
+    content = req.rawBody;
 
+    switch (req.headers['content-type']) {
+      
+      case 'application/json':
+        content = JSON.stringify(req.body);
+        type = 'json';
+        break;
+
+      case 'text/xml':
+      case 'application/xml':
+        type = 'xml';
+        break;
+
+      default:
+        break;      
+    }
+
+  
 //    console.log(req.body);
 //    console.log(req.rawBody);
 
@@ -252,8 +272,8 @@
 
     HookModel.query().insert({
       headers : JSON.stringify(req.headers),
-      body : JSON.stringify(req.body),
-      type : 'json'
+      body : content,
+      type : type
     }).then(function _then(hook) {
 
       res.status(200).send(JSON.stringify(hook, null, 2));
@@ -266,6 +286,7 @@
   router.post('/example', function postExample(req, res) {
 
     var obj = {
+      'test' : ['<', '>', '&'],
       'rmr' : {
         'hooky' : 'https://github.com/davidfmiller/hooky',
         'home' : 'https://readmeansrun.com',

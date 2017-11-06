@@ -38,8 +38,6 @@ dust.helpers.i18n = function(chunk, context, bodies, params) {
     dust.log('WARN', 'invalid parameter in @url helper');
   }
 
-//  chunk.render(body, context);
-
   return chunk;
 };
 
@@ -48,20 +46,16 @@ dust.helpers.i18n = function(chunk, context, bodies, params) {
  */
 dust.helpers.table = function(chunk, context, bodies, params) {
 
-
   try {
     const
       obj = JSON.parse(params.object),
-  //    profile = params.profile,
       body = bodies.block;
 
     chunk.write('<table class="headers"><thead><tr><th>Key</th><th>Value</th></tr></thead><tbody>');
     for (var i in obj) {
-      if (! obj.hasOwnProperty(i)) {
-        continue;
-      }
+      if (! obj.hasOwnProperty(i)) { continue; }
       chunk.write(
-        '<tr><th>' + i + '</th><td>: ' + obj[i] + '</td></tr>'
+        '<tr><th>' + i + '</th><td>' + obj[i] + '</td></tr>'
       );
     }
 
@@ -72,10 +66,9 @@ dust.helpers.table = function(chunk, context, bodies, params) {
     return chunk;
   }
 
-//  chunk.render(body, context);
-
   return chunk;
 };
+
 
 var _jsonFormat = function(obj) {
 
@@ -119,7 +112,7 @@ var _jsonFormat = function(obj) {
           _COMMON_LENGTH = _COMMON.length;
       }
 
-      return _CHAR[c];
+      return _CHAR[c];s
   },
 
   // enclose escaped strings in quotes
@@ -375,13 +368,33 @@ var _jsonFormat = function(obj) {
 dust.helpers.bodyFormat = function(chunk, context, bodies, params) {
 
   const
-    obj = JSON.parse(params.string) //params.type == 'json' ? JSON.parse(params.string) : params.string,
-  ;
+  obj = params.type == 'json' ? JSON.parse(params.string) : params.string, //params.type == 'json' ? JSON.parse(params.string) : params.string,
+  encode = parseInt(params.escape, 10) == 0,
 
-  console.log(params.type);
+  escapeString = function(unsafe) {
+    return unsafe.replace(/[<>&'"]/g, function (c) {
+        switch (c) {
+            case '<': return '&lt;';
+            case '>': return '&gt;';
+            case '&': return '&amp;';
+            case '\'': return '&apos;';
+            case '"': return '&quot;';
+        }
+    });
+  };
+
+  if (params.type != 'json') {
+
+    console.log(encode, obj);
+
+    chunk.write(
+      escape ? escapeString(obj) : obj
+    );
+    return chunk;
+  }
 
   // if we don't need all the <html> tags...
-  if (parseInt(params.tags, 10) == 0) {
+  if (encode) {
     chunk.write(JSON.stringify(obj, null, '  '));
     return chunk;
   }
@@ -402,8 +415,6 @@ dust.helpers.bodyFormat = function(chunk, context, bodies, params) {
 
  */
 dust.helpers.formatDate = function(chunk, context, bodies, params) {
-//  const
-//    body = bodies.block;
 
     if (params.stamp) {
       var mom = moment(Date.parse(params.stamp));
