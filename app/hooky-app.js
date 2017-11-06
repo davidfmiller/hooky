@@ -277,7 +277,7 @@
   router.post('/example', function postExample(req, res) {
 
     var obj = {
-      'test' : ['<', '>', '&'],
+      'test' : ['<', '>', '&', '"', '\''],
       'rmr' : {
         'hooky' : 'https://github.com/davidfmiller/hooky',
         'home' : 'https://readmeansrun.com',
