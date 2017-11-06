@@ -71,32 +71,7 @@
     }
   };
 
-
   Model.knex(knex);
-
-//  module.exports = Model;
-
-/*
-  const BaseModel = require('./model-base');
-
-  function Hook() {
-    BaseModel.apply(this, arguments);
-  }
-
-//  console.log(Model);
-
-  BaseModel.extend(Hook);
-
-  Hook.tableName = 'hook';
-
-  Hook.prototype.$afterGet = function() {
-    this.url = 'https://' + this.bucket + '.s3.amazonaws.com/' + this.name;
-  };
-
-  Hook.prototype.$beforeInsert = function () {
-  //  this.creationStamp = new Date().toISOString();
-  };
-*/
   module.exports = Model;
 
 }());

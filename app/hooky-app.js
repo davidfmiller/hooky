@@ -219,9 +219,6 @@
           builder.orWhere('creatorID', '=', query.person);
         }
 */
-  //      if (query.eager) {
-  //        builder.where('code', query.code);
-  //      }
 
   //      console.log(query);
   //      console.log(builder.toString());
@@ -248,7 +245,7 @@
     content = req.rawBody;
 
     switch (req.headers['content-type']) {
-      
+
       case 'application/json':
         content = JSON.stringify(req.body);
         type = 'json';
@@ -260,15 +257,9 @@
         break;
 
       default:
+        type = 'text';
         break;      
     }
-
-  
-//    console.log(req.body);
-//    console.log(req.rawBody);
-
-//    res.status(200).send(req.rawBody);
-//    return;
 
     HookModel.query().insert({
       headers : JSON.stringify(req.headers),
