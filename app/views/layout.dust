@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>hooky</title>
 
-    <link rel="stylesheet" href="/assets/css/hooky.css">
+    <link rel="stylesheet" href="//assets/css/hooky.css">
 
     <meta name="keywords" content="hooky">
     <meta name="description" content="hooky">
@@ -14,10 +14,10 @@
 
     <link rel="mask-icon" href="//assets/img/favicon.svg" color="rgba(0.2,0.2,0.2,1.0)">
     
-    <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="//assets/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="//assets/img/favicon.ico" type="image/x-icon">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="//assets/img/apple-touch-icon.png">
 
   </head>
   <body>
