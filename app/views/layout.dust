@@ -23,6 +23,35 @@
   <body>
     <div id="doc">
 
+    <header>
+      <div>
+        <h1>
+          <a href="/">Hooky</a>
+        </h1>
+
+      {?hooks}
+        <form action="/reset" method="post" class="reset">
+          <fieldset>
+            <legend>Clear all hooks</legend>
+            <button type="submit" data-popover="Clear hooks">Erase hooks</button>
+          </fieldset>
+        </form>
+      {/hooks}
+      {^hooks}
+        <form action="/example" method="post" class="example">
+          <fieldset>
+            <legend>Make a sample request</legend>
+          <button type="submit">Create an example</button>
+          </fieldset>
+        </form>
+
+      {/hooks}
+
+      </div>
+    </header>
+
+
+
       {+content}
         This is the base content.
       {/content}

@@ -3,26 +3,8 @@
 
 {#hook}
 
-<header>
-  <div>
-    <h1><a href="/">Hooky</a> #{id}</h1>
 
-    <form action="/hook/{id}/delete" method="post" class="delete">
-      <fieldset>
-        <legend>Delete this hook</legend>
-        <input type="hidden" name="id" value="{id}">
-        <button type="submit" data-popover='{"content":"Delete this hook","position":"top"}'>Delete</button>
-      </fieldset>
-    </form>
-
-    <a href="/hook/{id}/raw">Raw</a>
-
-  </div>
-</header>
-
-<h4><span data-popover="{creationStamp}">{@formatDate stamp=creationStamp /}</span></h4>
-{@table object=headers /}
-<pre>{@bodyFormat string=body /}</pre>
+{>"partials/hook"/}
 
 
 

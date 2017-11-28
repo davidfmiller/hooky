@@ -1,33 +1,6 @@
 {>layout/}
 {<content}
 
-<header>
-  <div>
-    <h1>
-      <a href="/">Hooky</a>
-    </h1>
-
-  {?hooks}
-    <form action="reset" method="post" class="reset">
-      <fieldset>
-        <legend>Clear all hooks</legend>
-        <button type="submit" data-popover="Clear hooks">Erase hooks</button>
-      </fieldset>
-    </form>
-  {/hooks}
-  {^hooks}
-    <form action="example" method="post" class="example">
-      <fieldset>
-        <legend>Make a sample request</legend>
-      <button type="submit">Create an example</button>
-      </fieldset>
-    </form>
-
-  {/hooks}
-
-  </div>
-</header>
-
 
 {^hooks}
   <p>No hooks</p>
@@ -37,21 +10,7 @@
   <ol>
     {#hooks}
       <li>
-        <h4><a href="/hook/{id}" data-popover='{"position":"top","content":"{creationStamp}"}'>{@formatDate stamp=creationStamp /}</a> <em class="hook-{type}">{type}</em></h4>
-        <form action="/hook/{id}/delete" method="post" class="delete">
-          <textarea id="hook-{id}-textarea">{@bodyFormat string=body escape=1 type=type /}</textarea>
-          <fieldset>
-            <legend>Delete this hook</legend>
-            <input type="hidden" name="id" value="{id}">
-            <button type="submit" data-popover='{"content":"Delete this hook","position":"top"}'>Delete</button>
-            <a class="button" href="/hook/{id}/raw" data-popover='{"content":"View raw hook","position":"top"}'>Raw</a>
-            <a class="button" href="/hook/{id}/download" data-popover='{"content":"Download this hook","position":"top"}'>Download</a>
-            <button class="copy" data-clipboard-target="#hook-{id}-textarea" data-popover='{"content":"Copy to clipboard","position":"top"}'>Copy</button>
-          </fieldset>
-        </form>
-
-        {@table object=headers /}
-        <pre>{@bodyFormat string=body escape=1 type=type /}</pre>
+        {>"partials/hook"/}
       </li>
     {/hooks}
   </ol>
