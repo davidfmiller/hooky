@@ -5,3 +5,4 @@ hooky.log
 app/public/assets/css/*
 app/public/assets/js/*
 hooky-config.json
+npm-debug.log

@@ -2,28 +2,38 @@
 /* global document,window,Element,module,require */
 
 (function() {
-
   'use strict';
 
   window.Hooky = {
   //  vue : require('./lib/vue.min.js'),
-    Popover : require('./lib/popover'),
-    Clipboard : require('./lib/clipboard')
+    Popover: require('./lib/popover'),
+    Clipboard: require('./lib/clipboard')
   //  screen : require('./lib/fullscreen'),
   //  backdrop : require('./lib/backdrop')
   };
 
-  var button = document.querySelector('form.reset button');
+  let
+  i = 0;
+
+  const
+  button = document.querySelector('form.reset button'),
+  fields = document.querySelectorAll('pre > span.field'),
+  copys = document.querySelectorAll('button.copy'),
+  preventDefault = function(e) {
+    e.preventDefault();
+  };
+
+  window.Hooky.Popover(null, {position: "side", color: "rgba(0,0,0,0.9)"});
+  window.Hooky.Clipboard('button.copy');
+
   if (button) {
     button.addEventListener('click', function(e) {
-      var b = window.confirm('Are you sure you wish to erase all hooks?');
-      if (! b) {
+      if (! window.confirm('Are you sure you wish to erase all hooks?')) {
         e.preventDefault();
       }
     });
   }
-  
-  var popover = new window.Hooky.Popover(null, {position: "side", color : "rgba(0,0,0,0.9)"});
+
 /*
   popover.on(
     'pop',
@@ -34,29 +44,24 @@
   );
 */
 
-  var fields = document.querySelectorAll('pre > span.field');
-  for (var i in fields) {
+  for (i in fields) {
     if (! fields.hasOwnProperty(i)) {
       continue;
     }
-    var span = fields[i], toggle = span.querySelector('span.toggle');
-    if (toggle && toggle.parentNode == span) {
+    const span = fields[i], toggle = span.querySelector('span.toggle');
+    if (toggle && toggle.parentNode === span) {
       span.classList.add('collapsed');
     }
   }
 
-  var
-  copys = document.querySelectorAll('button.copy'),
-  preventDefault = function(e) {
-    e.preventDefault();
-  };
-
-  for (var i in copys) {
-    if (! copys.hasOwnProperty(i)) { continue; }
+  for (i in copys) {
+    if (! copys.hasOwnProperty(i)) {
+      continue;
+    }
     copys[i].addEventListener('click', preventDefault);
   }
 
-  var clipboard = new window.Hooky.Clipboard('button.copy');
+
 /*
   clipboard.on('success', function(e) {
     console.info('Action:', e.action);
@@ -73,11 +78,10 @@ clipboard.on('error', function(e) {
   console.error('Trigger:', e.trigger);
 });
 
-  
   /*
   for (var i in copys) {
     if (! copys.hasOwnProperty(i)) { continue; }
-    
+
     var button = copys[i];
     button.addEventListener('click', function(e) {
 
@@ -90,13 +94,18 @@ clipboard.on('error', function(e) {
   }
 */
 
-  var
+  const
   toggler = function(e) {
-    var n = e.target.parentNode,
-        needle = 'collapsed';
+    const
+    n = e.target.parentNode,
+    needle = 'collapsed';
 
-    while (n && n.className.indexOf('field') < 0) { n = n.parentNode; }
-    if (! n) { return; }
+    while (n && n.className.indexOf('field') < 0) {
+      n = n.parentNode;
+    }
+    if (! n) {
+      return;
+    }
 
     if (n.className.indexOf(needle) >= 0) {
       n.className = 'field';
@@ -104,31 +113,26 @@ clipboard.on('error', function(e) {
       n.className += ' ' + needle;
     }
   },
-
   hover = function(e) {
-    var n = e.target.parentNode;
-    while (n && n.className.indexOf('field') < 0) { n = n.parentNode; }
+    const n = e.target.parentNode;
+    while (n && n.className.indexOf('field') < 0) {
+      n = n.parentNode;
+    }
     n.className = n.className.trim() + ' hover';
   },
-
   blur = function(e) {
-
-    var n = e.target.parentNode;
+    const n = e.target.parentNode;
     while (n && n.className.indexOf('field') < 0) {
       n = n.parentNode;
     }
 
     n.className = n.className.replace(/hover/gi, '').trim();
   },
-
   toggles = document.getElementsByClassName('toggle'),
   abbrs = document.getElementsByTagName('abbr'),
-  objs = document.getElementsByClassName('obj'),
-  open = [],
-  close = [],
-  i = 0;
+  objs = document.getElementsByClassName('obj');
 
-  for (; i < toggles.length; i++) {
+  for (i = 0; i < toggles.length; i++) {
     toggles[i].addEventListener('click', toggler);
   }
 
@@ -143,5 +147,4 @@ clipboard.on('error', function(e) {
     objs[i].addEventListener('mouseover', hover);
     objs[i].addEventListener('mouseout', blur);
   }
-
-}());
+})();
