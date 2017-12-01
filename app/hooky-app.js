@@ -1,21 +1,21 @@
-/*jshint esnext:true */
+/* jshint esnext:true */
 /* globals require, module, console, __dirname */
 
-(function(){
-
+(function() {
   'use strict';
+
   require('dustjs-helpers');
   require('./lib/dust-helpers');
 
   const
-      process = require('process'),
+//      process = require('process'),
       express = require('express'),
       bodyParser = require('body-parser'),
       app = express(),
-      fs = require('fs'),
+//      fs = require('fs'),
       request = require('request'),
       cons = require('consolidate'),
-      queryString = require('query-string'),
+//      queryString = require('query-string'),
       morgan = require('morgan'),
 
       HookModel = require('./models/hook');
@@ -38,22 +38,22 @@
 
 
   const
-      template_engine = 'dust',
+      template = 'dust',
 //      domain = config.hosts.http.domain,
       router = express.Router(),
       port = 8082,
       metadata = {
-        page : {} // see resetMetadata
+        page: {} // see resetMetadata
       },
 
       resetMetadata = function(req) {
         metadata.page = {
-          'image' : '/assets/img/og-image.png',
-          'title' : 'hooky',
-          'keywords' : 'hooky',
-          'description' : 'A simple tool for logging webhooks',
-          'class' : '',
-          'url' : ''
+          'image': '/assets/img/og-image.png',
+          'title': 'hooky',
+          'keywords': 'hooky',
+          'description': 'A simple tool for logging webhooks',
+          'class': '',
+          'url': ''
         };
 
         if (req.query.msg) {
@@ -66,10 +66,9 @@
   app.disable('x-powered-by');
   app.engine('dust', cons.dust);
 
-  app.use(bodyParser.json())
+  app.use(bodyParser.json());
   app.use(function(req, res, next) {
-
-    if (req.headers['content-type'] == 'application/json') {
+    if (req.headers['content-type'] === 'application/json') {
       next();
       return;
     }
@@ -77,31 +76,29 @@
     req.rawBody = '';
 //    req.setEncoding('utf8');
 
-    req.on('data', function(chunk) { 
+    req.on('data', function(chunk) {
       req.rawBody += chunk;
     });
 
-    req.on('end', function(chunk) { 
+    req.on('end', function() {
       next();
     });
-
   });
 
 
-  app.set('template_engine', template_engine);
+  app.set('template_engine', template);
 //  app.set('domain', domain);
   app.set('views', __dirname + '/views');
-  app.set('view engine', template_engine);
+  app.set('view engine', template);
 
   app.use(function _use(req, res, next) {
     next();
   });
 
-  app.use(morgan('dev')); 
+  app.use(morgan('dev'));
   app.use(express.static(__dirname + '/public'));
 
   router.get('/hook/:id', function getHook(req, res) {
-
     resetMetadata(req);
 
     metadata.page.title = 'Hooky';
@@ -111,12 +108,10 @@
     HookModel.query()
     .where('id', '=', req.params.id)
     .then(function _then(hook) {
-
       res.render('hook', {
-        meta : metadata,
-        hook : hook
+        meta: metadata,
+        hook: hook
       });
-
     })
     .catch(function _catch(err) {
       res.status(500).send(err);
@@ -124,20 +119,20 @@
   });
 
   router.get('/hook/:id/raw', function getRaw(req, res) {
-
     HookModel.query()
     .where('id', '=', req.params.id)
     .then(function _then(hooks) {
-      
-      if (hooks.length == 0) {
+      if (hooks.length === 0) {
         res.status(404).send('Not found');
         return;
       }
 
-      var
-      hook = hooks[0],
-      content = hook.body,
-      mime = 'text/plain';
+      const
+      hook = hooks[0];
+
+      let
+      mime = 'text/plain',
+      content = hook.body;
 
       switch (hook.type) {
         case 'json':
@@ -159,18 +154,18 @@
   });
 
   router.get('/hook/:id/download', function getDownload(req, res) {
-
     HookModel.query()
     .where('id', '=', req.params.id)
     .then(function _then(hooks) {
-      
-      if (hooks.length == 0) {
+      if (hooks.length === 0) {
         res.status(404).send('Not found');
         return;
       }
 
-      var
-      hook = hooks[0],
+      const
+      hook = hooks[0];
+
+      let
       content = hook.body,
       extension = 'txt',
       mime = 'text/plain';
@@ -200,7 +195,6 @@
 
 
   router.get('/', function getIndex(req, res) {
-
     resetMetadata(req);
 
     metadata.page.title = 'Hooky';
@@ -209,7 +203,7 @@
 
       HookModel.query()
       .orderBy('id', 'desc')
-      .modify(function _modify(builder) {
+      .modify(function _modify(/* builder */) {
 /*
         if (query.code) {
           builder.where('code', query.code);
@@ -224,28 +218,23 @@
   //      console.log(builder.toString());
       })
       .then(function _then(hooks) {
-
         res.render('index', {
-          meta : metadata,
-          hooks : hooks
+          meta: metadata,
+          hooks: hooks
         });
-
       })
       .catch(function _catch(err) {
         res.status(500).send(err);
       });
-
   });
 
   router.post('/', function postIndex(req, res) {
-
-    var
-    body = req.body,
+    let
+//    body = req.body,
     type = 'text',
     content = req.rawBody;
 
     switch (req.headers['content-type']) {
-
       case 'application/json':
         content = JSON.stringify(req.body);
         type = 'json';
@@ -258,67 +247,60 @@
 
       default:
         type = 'text';
-        break;      
+        break;
     }
 
     HookModel.query().insert({
-      headers : JSON.stringify(req.headers),
-      body : content,
-      type : type
+      headers: JSON.stringify(req.headers),
+      body: content,
+      type: type
     }).then(function _then(hook) {
-
       res.status(200).send(JSON.stringify(hook, null, 2));
-
     }).catch(function _catch(err) {
       console.log(err);
     });
   });
 
   router.post('/example', function postExample(req, res) {
-
-    var obj = {
-      'test' : ['<', '>', '&', '"', '\''],
-      'rmr' : {
-        'hooky' : 'https://github.com/davidfmiller/hooky',
-        'home' : 'https://readmeansrun.com',
-        'safari' : 'https://readmeansrun.com/code/readmeansafari/'
+    const obj = {
+      'test': ['<', '>', '&', '"', '\''],
+      'rmr': {
+        'hooky': 'https://github.com/davidfmiller/hooky',
+        'home': 'https://readmeansrun.com',
+        'safari': 'https://readmeansrun.com/code/readmeansafari/'
       },
-      'links' : {
-        'strava' : 'https://strava.com/',
-        'youtube' : 'https://www.youtube.com/channel/UCf6hm45A9tlsbn11q9loYCw?view_as=subscriber',
-        'flickr' : 'https://www.flickr.com/photos/davidfmiller/'
+      'links': {
+        'strava': 'https://strava.com/',
+        'youtube': 'https://www.youtube.com/channel/UCf6hm45A9tlsbn11q9loYCw?view_as=subscriber',
+        'flickr': 'https://www.flickr.com/photos/davidfmiller/'
       }
     };
 
-    request.post({url : 'http://localhost:' + port + '/', json: true, body : obj, headers : { 'User-Agent' : 'hooky' }}, function _post(error, response, body) {
+    request.post({url: 'http://localhost:' + port + '/', json: true, body: obj, headers: { 'User-Agent': 'hooky' }}, function _post(error, response /* , body */) {
       if (error || response.statusCode !== 200)  {
-        res.status(500).send(JSON.stringify(e, null, 2));
+        res.status(500).send(JSON.stringify(error, null, 2));
         return;
       }
-      res.redirect(301, '/')
+      res.redirect(301, '/');
     });
   });
 
 
   router.post('/hook/:id/delete', function postDelete(req, res) {
-
     HookModel
     .query()
     .delete()
     .where('id', req.params.id)
-    .then(function _then(thing) {
-
+    .then(function _then(/* thing */) {
       res.redirect(301, '/');
-
     }).catch(function _catch(err) {
       console.log(err);
-      reject(err);
+//      res.redirect(500, '/');
+//      reject(err);
     });
-
   });
 
   router.post('/reset', function postReset(req, res) {
-
     HookModel
     .query()
     .delete()
@@ -328,15 +310,13 @@
       console.log(err);
       res.status(500).send(JSON.stringify(err));
     });
-
   });
 
 
-  app.use(morgan('dev')); 
+  app.use(morgan('dev'));
   app.use(express.static(__dirname + '/static'));
   app.use('/', router);
 
   app.listen(port);
   console.log('💥  ' + port);
-  
-}());
+})();
