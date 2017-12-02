@@ -208,11 +208,13 @@
   });
 
   router.post('/', bodyParser.raw({type: '*/*'}), function postIndex(req, res) {
+    const header = req.headers['content-type'].split(';')[0];
+
     let
     type = 'text',
     content = req.body.toString('utf8');
 
-    switch (req.headers['content-type']) {
+    switch (header) {
       case 'application/json':
 
         try {
