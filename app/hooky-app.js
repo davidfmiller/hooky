@@ -66,27 +66,7 @@
   app.disable('x-powered-by');
   app.engine('dust', cons.dust);
 
-/*
-  app.use(function(req, res, next) {
-    if (req.headers['content-type'] === 'application/json') {
-      next();
-      return;
-    }
-
-    req.rawBody = '';
-    req.on('data', function(chunk) {
-      req.rawBody += chunk;
-    });
-    req.on('end', function() {
-      next();
-    });
-
-next();
-  });
-*/
-
   app.set('template_engine', template);
-//  app.set('domain', domain);
   app.set('views', __dirname + '/views');
   app.set('view engine', template);
 
@@ -237,8 +217,8 @@ next();
 
         try {
           // check to make sure it's a valid JSON-encoded value
-          const obj = JSON.parse(content);
-        } catch(e) {
+          JSON.parse(content);
+        } catch (e) {
           // handle stripe's errant quotes
           content = content.substr(1).slice(0,-1);
         }
@@ -282,7 +262,7 @@ next();
       }
     };
 
-    request.post({url: 'http://localhost:' + port + '/', json: true, body: obj, headers: { 'User-Agent': 'hooky' }}, function _post(error, response, body ) {
+    request.post({url: 'http://localhost:' + port + '/', json: true, body: obj, headers: { 'User-Agent': 'hooky' }}, function _post(error, response) {
       if (error || response.statusCode !== 200)  {
         res.status(500).send(JSON.stringify(error, null, 2));
         return;
