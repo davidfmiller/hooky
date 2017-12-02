@@ -383,15 +383,19 @@ dust.helpers.bodyFormat = function(chunk, context, bodies, params) {
     });
   };
 
-  if (params.type != 'json') {
-
-    console.log(encode, obj);
+  if (params.type != 'json') { // == 'txt'
 
     chunk.write(
       escape ? escapeString(obj) : obj
     );
     return chunk;
+
+  } else if (params.type == 'xml') {
+
+    return;
   }
+  
+
 
   // if we don't need all the <html> tags...
   if (encode) {

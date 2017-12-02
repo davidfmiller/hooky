@@ -66,7 +66,7 @@
   app.disable('x-powered-by');
   app.engine('dust', cons.dust);
 
-  app.use(bodyParser.json());
+/*
   app.use(function(req, res, next) {
     if (req.headers['content-type'] === 'application/json') {
       next();
@@ -74,17 +74,16 @@
     }
 
     req.rawBody = '';
-//    req.setEncoding('utf8');
-
     req.on('data', function(chunk) {
       req.rawBody += chunk;
     });
-
     req.on('end', function() {
       next();
     });
-  });
 
+next();
+  });
+*/
 
   app.set('template_engine', template);
 //  app.set('domain', domain);
@@ -228,15 +227,22 @@
       });
   });
 
-  router.post('/', function postIndex(req, res) {
+  router.post('/', bodyParser.raw({type: '*/*'}), function postIndex(req, res) {
     let
-//    body = req.body,
     type = 'text',
-    content = req.rawBody;
+    content = req.body.toString('utf8');
 
     switch (req.headers['content-type']) {
       case 'application/json':
-        content = JSON.stringify(req.body);
+
+        try {
+          // check to make sure it's a valid JSON-encoded value
+          const obj = JSON.parse(content);
+        } catch(e) {
+          // handle stripe's errant quotes
+          content = content.substr(1).slice(0,-1);
+        }
+
         type = 'json';
         break;
 
@@ -276,11 +282,12 @@
       }
     };
 
-    request.post({url: 'http://localhost:' + port + '/', json: true, body: obj, headers: { 'User-Agent': 'hooky' }}, function _post(error, response /* , body */) {
+    request.post({url: 'http://localhost:' + port + '/', json: true, body: obj, headers: { 'User-Agent': 'hooky' }}, function _post(error, response, body ) {
       if (error || response.statusCode !== 200)  {
         res.status(500).send(JSON.stringify(error, null, 2));
         return;
       }
+      console.log('redirecting');
       res.redirect(301, '/');
     });
   });
