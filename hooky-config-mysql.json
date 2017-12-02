@@ -6,5 +6,6 @@
     "database": "hooky",
     "table": "hook",
     "driver": "mysql"
-  }
+  },
+  "readonly" : false
 }

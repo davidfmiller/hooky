@@ -10,52 +10,21 @@
     Model = require('objection').Model,
     Knex = require('knex'),
     process = require('process'),
-    init = {
-      db : {
-        "host" : "127.0.0.1",
-        "username" : "",
-        "password" : "",
-        "database" : "",
-        "table" : "hook",
-        "driver" : "mysql"
+    path = __dirname + '/../../hooky-config.json',
+    db = JSON.parse(fs.readFileSync(path)).db,
+    knex = require('knex')({
+      client: db.driver,
+      connection: {
+        host : db.host,
+        user : db.username,
+        password : db.password,
+        database : db.database
       }
-    };
-
-  try {
-
-    var path = "../hooky-config.json";
-
-    if (! fs.existsSync(path)) {
-      fs.writeFileSync(path, JSON.stringify(init, null, '  '));
-      process.stderr.write("🚫 Created default config file at `" + path + "`; enter database credentials and restart hooky-app\n");
-      process.exit(1);
-    }
-
-    JSON.parse(fs.readFileSync(path)).db;
-
-  } catch (e) {
-
-    process.stderr.write("🚫 Invalid config file at `" + path + "`; ex: \n" + JSON.stringify(init, null, "  ") + "\n");
-    process.exit(1);
-  }
-
-
-  var db = JSON.parse(fs.readFileSync("../hooky-config.json")).db;
-
-  var knex = require('knex')({
-    client: db.driver,
-    connection: {
-      host : db.host,
-      user : db.username,
-      password : db.password,
-      database : db.database
-    }
-  });
+    });
 
   knex.on( 'query', function( queryData ) {
   //  console.log( queryData );
   });
-
 
   Model.tableName = db.table;
   Model.jsonSchema = {

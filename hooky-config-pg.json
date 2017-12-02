@@ -6,5 +6,6 @@
     "database": "dave",
     "table": "hook",
     "driver": "pg"
-  }
+  },
+  "readonly" : false
 }
