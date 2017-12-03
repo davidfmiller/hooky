@@ -16,11 +16,10 @@
         'table': 'hook',
         'driver': 'mysql'
       },
-      readonly : false
+      readonly: false
     };
 
   try {
-
     if (! fs.existsSync(PATH)) {
       fs.writeFileSync(PATH, JSON.stringify(INIT, null, '  '));
       process.stderr.write("⚠️  Created default config file at `" + PATH + "`; enter database credentials and run `node hooky-app.js`\n");
@@ -30,10 +29,8 @@
     }
 
     JSON.parse(fs.readFileSync(PATH)).db;
-
   } catch (e) {
     process.stderr.write("🚫 Invalid config file at `" + PATH + "`; ex: \n" + JSON.stringify(INIT, null, "  ") + "\n");
     process.exit(1);
   }
-
 })();

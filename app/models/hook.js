@@ -1,28 +1,24 @@
-/*jshint esnext:true */
-/* globals require, module */
 
 (function() {
-
   'use strict';
 
   const
     fs = require('fs'),
     Model = require('objection').Model,
-    Knex = require('knex'),
-    process = require('process'),
+//    process = require('process'),
     path = __dirname + '/../../hooky-config.json',
     db = JSON.parse(fs.readFileSync(path)).db,
     knex = require('knex')({
       client: db.driver,
       connection: {
-        host : db.host,
-        user : db.username,
-        password : db.password,
-        database : db.database
+        host: db.host,
+        user: db.username,
+        password: db.password,
+        database: db.database
       }
     });
 
-  knex.on( 'query', function( queryData ) {
+  knex.on( 'query', function(/* queryData */) {
   //  console.log( queryData );
   });
 
@@ -42,5 +38,4 @@
 
   Model.knex(knex);
   module.exports = Model;
-
-}());
+})();
