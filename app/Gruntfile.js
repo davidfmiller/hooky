@@ -1,13 +1,11 @@
 module.exports = function(grunt) {
-
   'use strict';
 
   grunt.initConfig({
-
     pkg: grunt.file.readJSON('package.json'),
 
-    jshint : {
-      files : ['scripts/*.js'],
+    jshint: {
+      files: ['scripts/*.js']
     },
 
 /*
@@ -22,22 +20,22 @@ module.exports = function(grunt) {
       }
     },*/
 
-    compass : {
-      dist : {
-        options : {
-          sassDir : 'styles',
-          cssDir : 'public/assets/css',
-          environment : 'production',
-          outputStyle : 'compressed'
+    compass: {
+      dist: {
+        options: {
+          sassDir: 'styles',
+          cssDir: 'public/assets/css',
+          environment: 'production',
+          outputStyle: 'compressed'
         }
       }
     },
-    
-    watch : {
-      css : {
-        files : ['styles/*.scss'],
-        tasks : ['compass']
-      }/*,
+
+    watch: {
+      css: {
+        files: ['styles/*.scss'],
+        tasks: ['compass']
+      }/* ,
       js : {
         files : ['scripts/*.js'],
         tasks : ['jshint', 'uglify']
