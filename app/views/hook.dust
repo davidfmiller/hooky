@@ -3,10 +3,7 @@
 
 {#hook}
 
-
 {>"partials/hook"/}
-
-
 
 {/hook}
 

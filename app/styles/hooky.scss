@@ -1,6 +1,10 @@
 html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,select,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,button,caption,cite,code,dfn,em,input,optgroup,option,select,strong,textarea,th,var{font:inherit}del,ins{text-decoration:none}li{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:baseline}sub{vertical-align:baseline}legend{color:#000}
 legend { display: none; }
 
+html {
+  background: #eee;
+}
+
 body {
   padding: 25px;
   font-family: sans-serif;
@@ -55,12 +59,16 @@ h4 {
   }
 }
 
+div.hook {
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
+}
+
 ol {
 
-  li {
+  & > li {
 
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
 
     & + li {
       margin-top: 10px;
@@ -72,11 +80,13 @@ footer {
 
   span {
     color: #ddd;
+    transition: color 0.2s;
   }
   text-align: right;
 
   a {
     color: #ddd;
+    transition: color 0.2s;
   }
 
 

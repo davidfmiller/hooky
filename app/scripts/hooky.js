@@ -23,8 +23,8 @@
     e.preventDefault();
   };
 
-  window.Hooky.Popover(null, {position: "side", color: "rgba(0,0,0,0.9)"});
-  window.Hooky.Clipboard('button.copy');
+  new window.Hooky.Popover(null, {position: "side", color: "rgba(0,0,0,0.9)"});
+//  window.Hooky.Clipboard('button.copy');
 
   if (button) {
     button.addEventListener('click', function(e) {
@@ -97,8 +97,9 @@ clipboard.on('error', function(e) {
   const
   toggler = function(e) {
     const
-    n = e.target.parentNode,
     needle = 'collapsed';
+
+    let n = e.target.parentNode;
 
     while (n && n.className.indexOf('field') < 0) {
       n = n.parentNode;
@@ -114,14 +115,14 @@ clipboard.on('error', function(e) {
     }
   },
   hover = function(e) {
-    const n = e.target.parentNode;
+    let n = e.target.parentNode;
     while (n && n.className.indexOf('field') < 0) {
       n = n.parentNode;
     }
     n.className = n.className.trim() + ' hover';
   },
   blur = function(e) {
-    const n = e.target.parentNode;
+    let n = e.target.parentNode;
     while (n && n.className.indexOf('field') < 0) {
       n = n.parentNode;
     }
