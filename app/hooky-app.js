@@ -14,7 +14,7 @@
       app = express(),
       fs = require('fs'),
       path = __dirname + '/../hooky-config.json',
-      readonly = JSON.parse(fs.readFileSync(path)).readonly,
+      writeonly = JSON.parse(fs.readFileSync(path)).writeonly,
       request = require('request'),
       cons = require('consolidate'),
 //      queryString = require('query-string'),
@@ -80,6 +80,10 @@
   app.use(express.static(__dirname + '/public'));
 
   router.get('/hook/:id', function getHook(req, res) {
+    if (writeonly) {
+      res.status(401).send('Unauthorized');
+      return;
+    }
     resetMetadata(req);
 
     metadata.page.title = 'Hooky';
@@ -100,6 +104,11 @@
   });
 
   router.get('/hook/:id/raw', function getRaw(req, res) {
+    if (writeonly) {
+      res.status(401).send('Unauthorized');
+      return;
+    }
+
     HookModel.query()
     .where('id', '=', req.params.id)
     .then(function _then(hooks) {
@@ -135,6 +144,11 @@
   });
 
   router.get('/hook/:id/download', function getDownload(req, res) {
+    if (writeonly) {
+      res.status(401).send('Unauthorized');
+      return;
+    }
+
     HookModel.query()
     .where('id', '=', req.params.id)
     .then(function _then(hooks) {
@@ -173,9 +187,12 @@
     });
   });
 
-
-
   router.get('/', function getIndex(req, res) {
+    if (writeonly) {
+      res.status(401).send('Unauthorized');
+      return;
+    }
+
     resetMetadata(req);
 
     metadata.page.title = 'Hooky';
@@ -209,6 +226,7 @@
       });
   });
 
+  /* */
   router.post('/', bodyParser.raw({type: '*/*'}), function postIndex(req, res) {
     const header = req.headers['content-type'].split(';')[0];
 
@@ -251,7 +269,13 @@
     });
   });
 
+  /* Create an example hook */
   router.post('/example', function postExample(req, res) {
+    if (writeonly) {
+      res.status(401).send('Unauthorized');
+      return;
+    }
+
     const obj = {
       'test': ['<', '>', '&', '"', '\''],
       'rmr': {
@@ -276,8 +300,13 @@
     });
   });
 
-
+  /* Delete a specific hook */
   router.post('/hook/:id/delete', function postDelete(req, res) {
+    if (writeonly) {
+      res.status(401).send('Unauthorized');
+      return;
+    }
+
     HookModel
     .query()
     .delete()
@@ -291,7 +320,13 @@
     });
   });
 
+  /* Delete all hooks */
   router.post('/reset', function postReset(req, res) {
+    if (writeonly) {
+      res.status(401).send('Unauthorized');
+      return;
+    }
+
     HookModel
     .query()
     .delete()
