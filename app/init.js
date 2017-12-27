@@ -16,7 +16,7 @@
         'table': 'hook',
         'driver': 'mysql'
       },
-      readonly: false
+      writeonly: false
     };
 
   try {
