@@ -8,12 +8,12 @@
 
     <meta name="keywords" content="hooky">
     <meta name="description" content="hooky">
-    <meta name="viewport" content="width=400">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta property="og:image" content="/assets/img/og-image.png">
 
     <link rel="mask-icon" href="/assets/img/favicon.svg" color="rgba(0.2,0.2,0.2,1.0)">
-    
+
     <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
 
