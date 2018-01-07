@@ -1,8 +1,6 @@
 # hooky
 
-## What is it?
-
-A simple tool for logging webhooks
+Debug your webhooks
 
 ## Why?
 

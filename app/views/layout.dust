@@ -12,12 +12,20 @@
 
     <meta property="og:image" content="/assets/img/og-image.png">
 
-    <link rel="mask-icon" href="/assets/img/favicon.svg" color="rgba(0.2,0.2,0.2,1.0)">
+    <link rel="mask-icon" href="/assets/img/favicon.svg" color="#4a90e2">
 
     <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+
+    <meta property="og:title" content="Hooky">
+    <meta property="og:description" content="Debug your webhooks">
+    <meta property="og:email" content="davidfmiller@me.com">
+    <meta property="og:url" content="https://davidfmiller.github.io/hooky">
+    <meta property="fb:admins" content="eldaverino">
+    <meta property="og:image" content="./og-image.png">
+
 
   </head>
   <body>
