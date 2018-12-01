@@ -33,7 +33,6 @@
     "grunt": "^1.0.3",
     "grunt-contrib-compass": "~0.6.0",
     "grunt-contrib-cssmin": "~0.7.0",
-    "grunt-contrib-jshint": "^2.0.0",
     "grunt-contrib-nodeunit": "~0.2.0",
     "grunt-contrib-uglify": "^4.0.0",
     "grunt-contrib-watch": "^1.1.0",
