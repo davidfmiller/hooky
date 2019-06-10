@@ -32,7 +32,7 @@
     "express": "^4.14.1",
     "grunt": "^1.0.4",
     "grunt-contrib-compass": "~0.6.0",
-    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt-contrib-cssmin": "^3.0.0",
     "grunt-contrib-nodeunit": "~0.2.0",
     "grunt-contrib-uglify": "^4.0.0",
     "grunt-contrib-watch": "^1.1.0",
